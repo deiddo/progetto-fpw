@@ -1,0 +1,21 @@
+:root {
+	--neroSfondo: #141414;
+	--rossoScuro: #5c1514;
+	--coloreTitolo: #b09571;
+	--bianco: #fffbf7;
+}
+
+@font-face {
+	font-family: 'MetalMania';
+	src: url('./fonts/MetalMania-Regular.ttf');
+}
+
+@font-face {
+	font-family: 'ChuckNoon';
+	src: url('./fonts/Chuck-Noon.ttf');
+}
+
+@font-face {
+	font-family: 'Skorzhen-NCV';
+	src: url('./fonts/Skorzhen-NCV.ttf');
+}
