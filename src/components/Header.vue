@@ -6,7 +6,7 @@
 	<header>
 		<div class="container">
 			<div id="divLogo">
-				<img src="../assets/img/logo.png" alt="Logo Spoti Pati" id="logo">
+				<RouterLink to="/"><img src="../assets/img/logo.png" alt="Logo Spoti Pati" id="logo"></RouterLink>
 			</div>
 
 			<div id="divTitle">
@@ -22,20 +22,19 @@
 	.container {
 		margin: 0;
 		padding-top: 15px;
+
 		display: block;
+		
 		width: 100%;
 		height: auto;
+		
+		font-family: 'Skorzhen-NCV';
 		background-color: var(--neroSfondo);
-	}
-
-	#divLogo {
-		float: left;
 	}
 
 	.title {
 		margin: 0;
 		
-		font-size: 9vh;
 		font-weight: bolder;
 		color: var(--coloreTitolo);
 	}
@@ -45,10 +44,40 @@
 	}
 
 
-	@media only screen and (max-width: 768px) {
+	/*	Media query per desktop	*/
+	@media only screen and (min-width: 768px) {
+		#divLogo {
+			float: left;
+		}
+
 		.title {
 			font-size: 4em;
 		}
+	}
+
+
+
+	/*	Media query per smartphone	*/
+	@media only screen and (max-width: 768px) {
+		#divLogo {
+			width: 100%;
+		}
+
+		#logo {
+			display: block;
+			margin: auto;
+		}
+		
+		.title {
+			text-align: center;
+			font-size: 3em;
+		}
+
+		.subtitle {
+			display: none;
+		}
+
+		
 	}
 
 

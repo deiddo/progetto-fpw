@@ -28,33 +28,38 @@
 		padding: 0;
 	}
 
-	nav li {
+	nav li{		
+		font-family: 'ChuckNoon';
+
 		list-style-type: none;
-		display: inline;
-
-		font-size: 2em;
-		margin-right: 5%;
-
-		color: var(--bianco);
-
-		transition: 0.3s ease;
 	}
 
 	nav li:hover {
 		text-decoration: underline;
-		transition: 0.3s ease;
 	}
 
+
+	/*	Media query per desktop	*/
 	@media only screen and (min-width: 768px) {
 		nav {
 			position: sticky;
 			top: 0;
 		}
+
+		nav li {
+			display: inline;
+			margin-right: 5%;
+			font-size: 1.7em;
+		}
 	}
 
+	/*	Media query per smartphone	*/
 	@media only screen and (max-width: 768px) {
 		nav li {
 			display: block;
+
+			margin-top: 5px;
+			font-size: 1.5em;
 		}
 	}
 

@@ -10,7 +10,7 @@
 	</aside>
 
 	<article class="col-6" id="b">
-		b
+		PAGINA INIZIALE
 	</article>
 
 	<aside class="col-3" id="c">

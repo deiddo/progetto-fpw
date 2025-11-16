@@ -9,13 +9,13 @@ body {
 	overflow-x: hidden;
 }
 
-
-*, *:visited {
-	font-family: 'Skorzhen-NCV';
+/*	Relativo al testo	*/
+* {
 	text-decoration: none;
-	color: inherit;
+	color: var(--bianco);
 }
 
+/*	Relativo all'impostazione delle pagine (layout a colonne)	*/
 * {
 	box-sizing: border-box;
 }
@@ -33,7 +33,7 @@ body {
 }
 
 
-
+/*	Percentuali relative alle colonne	*/
 .col-1  { width: 8.33%; }
 .col-2  { width: 16.66%; }
 .col-3  { width: 25%; }
@@ -47,6 +47,8 @@ body {
 .col-11 { width: 91.66%; }
 .col-12 { width: 100%; }
 
+
+/*	Visualizzazione desktop: tre colonne disposte in orizzontale	*/
 @media only screen and (min-width: 768px) {
 	[class*="col-"] {
 		float: left;
@@ -54,6 +56,7 @@ body {
 	}
 }
 
+/*	Visualizzazione smartphone: tre colonne disposte in verticale	*/
 @media only screen and (max-width: 768px) {
 	[class*="col-"] {
 		float: none;
@@ -64,7 +67,7 @@ body {
 
 
 
-
+/*	TODO: vedere se rimuovere	*/
 .pubb {
 	margin: 0;
 	padding: 0;

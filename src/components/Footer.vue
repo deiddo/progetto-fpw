@@ -33,10 +33,11 @@
 		padding: 15px 0;
 
 		color: var(--bianco);
-
 	}
 
 	#divNomeGruppo, #divComponenti {
+		font-family: sans-serif;
+
 		text-align: center;
 	}
 
@@ -47,11 +48,19 @@
 
 	#divComponenti li {
 		list-style-type: none;
-		display: inline;
-
-		margin-right: 5%;
 	}
 
+
+	/*	Media query per desktop	*/
+	@media only screen and (min-width: 768px) {
+		#divComponenti li {
+			display: inline;
+			margin-right: 5%;
+		}
+	}
+
+
+	/*	Media query per smartphone	*/
 	@media only screen and (max-width: 768px) {
 		#divComponenti li {
 			display: block;

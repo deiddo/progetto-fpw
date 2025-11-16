@@ -35,6 +35,7 @@
 
 		background-color: var(--rossoScuro);
 		color: var(--bianco);
+		font-family: sans-serif;
 	}
 
 	.immagine {
