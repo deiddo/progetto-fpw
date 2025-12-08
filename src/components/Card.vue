@@ -1,4 +1,23 @@
-<script setup>
+<script>
+
+	export default {
+		props: {
+			immagine: {
+				type: String,
+				required: true
+			},
+
+			nome: {
+				type: String,
+				required: true
+			},
+
+			descrizione: {
+				type: String,
+				required: true
+			}
+		}
+	}
 
 </script>
 
@@ -7,16 +26,16 @@
 	<div class="card">
 
 		<div class="immagine">
-			<img src="../assets/img/user.png" alt="">
+			<img :src="immagine" alt="">
 		</div>
 
 		<div class="informazioni">
 			<div class="nome">
-				<p>NOME COGNOME</p>
+				<p>{{ nome }}</p>
 			</div>
 
 			<div class="descrizione">
-				<p>DESCRIZIONE DESCRIZIONE DESCRIZIONE DESCRIZIONE DESCRIZIONE DESCRIZIONE DESCRIZIONE DESCRIZIONE DESCRIZIONE DESCRIZIONE</p> 
+				<p>{{ descrizione }}</p> 
 			</div>
 		</div>
 
@@ -29,7 +48,6 @@
 	.card {
 		margin: 10px 0;
 		padding: 30px 0;
-		display: block;
 		overflow: hidden;
 		height: auto;
 
@@ -42,6 +60,8 @@
 		float: left;
 		width: 25%;
 		height: 100%;
+
+		outline: solid 1px black;
 	}
 
 	.immagine img {
@@ -52,6 +72,8 @@
 	.informazioni {
 		margin-left: 25%;
 		height: 100%;
+
+		outline: solid 1px black;
 	}
 
 	.nome, .descrizione {

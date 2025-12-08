@@ -1,5 +1,30 @@
-<script setup>
+<script>
+	import * as Api from '@/utils/apis.js'
+
 	import Card from '@/components/Card.vue';
+
+	export default {
+		components: {
+			Card
+		},
+
+		data() {
+			return {
+				prodotti: []
+			}
+		},
+
+		methods: {
+			async getListaProdotti() {
+				const data = await Api.getListaProdotti();
+				this.prodotti = data;
+			}
+		},
+
+		mounted() {
+			this.getListaProdotti();
+		}
+	}
 </script>
 
 
@@ -10,16 +35,7 @@
 	</aside>
 
 	<article class="col-6">
-		<Card />
-		<Card />
-		<Card />
-		<Card />
-		<Card />
-		<Card />
-		<Card />
-		<Card />
-		<Card />
-		<Card />
+		<Card v-for="prodotto in prodotti" :key="prodotto.id" :immagine="prodotto.immagine" :nome="prodotto.nome" :descrizione="prodotto.descrizione"/>
 		
 
 	</article>

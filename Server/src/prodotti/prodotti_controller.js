@@ -20,6 +20,12 @@ const getProdottoById = (req, res) => {
 
 
 const addProdotto = (req, res) => {
+
+	if(req.body == null) {
+		res.status(400).send('Richiesta non valida.');
+		return;
+	}
+
 	const { id, nome, descrizione, immagine } = req.body;
 	pool.query(queries.getProdottoById, [id], (error, results) => {
 		if(error) throw error;
@@ -56,8 +62,15 @@ const deleteProdotto = (req, res) => {
 
 
 const updateProdotto = (req, res) => {
+
+	if(req.body == null) {
+		res.status(400).send('Richiesta non valida.');
+		return;
+	}
+
 	const id = parseInt(req.params.id);
 	const { nome, descrizione, immagine } = req.body;
+
 	pool.query(queries.getProdottoById, [id], (error, results) => {
 		if(error) throw error;
 
