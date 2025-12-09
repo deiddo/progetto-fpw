@@ -22,7 +22,7 @@ const getProdottoById = (req, res) => {
 const addProdotto = (req, res) => {
 
 	if(req.body == null) {
-		res.status(400).send('Richiesta non valida.');
+		res.status(400).send('[400] Richiesta non valida.');
 		return;
 	}
 
@@ -31,13 +31,13 @@ const addProdotto = (req, res) => {
 		if(error) throw error;
 
 		if(results.rows.length > 0) {
-			res.status(400).send('Prodotto già presente nel DB.');
+			res.status(400).send('[400] Prodotto già presente nel DB.');
 		}
 
 		else {
 			pool.query(queries.addProdotto, [id, nome, descrizione, immagine], (error) => {
 				if(error) throw error;
-				res.status(201).send('Prodotto aggiunto con successo.');
+				res.status(201).send('[201] Prodotto aggiunto con successo.');
 			});
 		}
 	},);
@@ -51,11 +51,11 @@ const deleteProdotto = (req, res) => {
 		if(error) throw error;
 		
 		if(results.rowCount === 0) {
-			res.status(404).send('Prodotto non trovato.');
+			res.status(404).send('[404] Prodotto non trovato.');
 		}
 
 		else {
-			res.status(200).send('Prodotto eliminato correttamente.');
+			res.status(200).send('[200] Prodotto eliminato con successo.');
 		}
 	});
 };
@@ -64,7 +64,7 @@ const deleteProdotto = (req, res) => {
 const updateProdotto = (req, res) => {
 
 	if(req.body == null) {
-		res.status(400).send('Richiesta non valida.');
+		res.status(400).send('[400] Richiesta non valida.');
 		return;
 	}
 
@@ -75,13 +75,13 @@ const updateProdotto = (req, res) => {
 		if(error) throw error;
 
 		if(results.rows.length === 0) {
-			res.status(404).send('Prodotto non trovato.');
+			res.status(404).send('[404] Prodotto non trovato.');
 		}
 
 		else {
 			pool.query(queries.updateProdotto, [id, nome, descrizione, immagine], (error) => {
 				if(error) throw error;
-				res.status(201).send('Prodotto aggiornato con successo.');
+				res.status(200).send('[200] Prodotto aggiornato con successo.');
 			});
 		}
 	},);

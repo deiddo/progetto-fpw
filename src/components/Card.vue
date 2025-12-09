@@ -39,6 +39,8 @@
 			</div>
 		</div>
 
+		<div class="clear"></div>
+
 	</div>
 
 </template>
@@ -47,9 +49,7 @@
 
 	.card {
 		margin: 10px 0;
-		padding: 30px 0;
-		overflow: hidden;
-		height: auto;
+		padding: 2% 10%;
 
 		background-color: var(--rossoScuro);
 		color: var(--bianco);
@@ -57,23 +57,8 @@
 	}
 
 	.immagine {
-		float: left;
-		width: 25%;
 		height: 100%;
-
-		outline: solid 1px black;
-	}
-
-	.immagine img {
-		margin-top: 20%;
-		margin-left: 20%;
-	}
-
-	.informazioni {
-		margin-left: 25%;
-		height: 100%;
-
-		outline: solid 1px black;
+		text-align: center;
 	}
 
 	.nome, .descrizione {
@@ -86,24 +71,48 @@
 	}
 
 
+	/* Media query per smartphone */
 	@media only screen and (max-width: 768px) {
+
 		.immagine {
 			width: 100%;
 			position: relative;
 			margin: 10% 0;
+			overflow: hidden;
 		}
 
 		.immagine img {
-			margin: 0;
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
+			width: 300px;
 		}
 
 		.informazioni {
 			margin: 0;
 			text-align: center;
+		}
+	}
+
+	/* Media query per desktop */
+	@media only screen and (min-width: 768px) {
+
+		.immagine {
+			float: left;
+			width: 35%;
+
+			overflow: hidden;
+		}
+
+		.immagine img {
+			width: 300px;
+		}
+
+		.informazioni {
+			float: left;
+			height: 100%;
+			margin-left: 5%;
+		}
+
+		.clear {
+			clear: both;
 		}
 	}
 

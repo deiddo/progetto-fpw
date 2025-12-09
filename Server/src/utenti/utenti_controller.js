@@ -20,18 +20,24 @@ const getUtenteByUsername = (req, res) => {
 
 
 const addUtente = (req, res) => {
+
+	if(req.body == null) {
+		res.status(400).send('[400] Richiesta non valida.');
+		return;
+	}
+
 	const { username, password, nome, cognome, email, citta, data_nascita, sesso } = req.body;
 	pool.query(queries.getUtenteByUsername, [username], (error, results) => {
 		if(error) throw error;
 
 		if(results.rows.length > 0) {
-			res.status(400).send('Nome utente non disponibile.');
+			res.status(400).send('[400] Nome utente non disponibile.');
 		}
 
 		else {
 			pool.query(queries.addUtente, [username, password, nome, cognome, email, citta, data_nascita, sesso], (error) => {
 				if(error) throw error;
-				res.status(201).send('Utente aggiunto con successo.');
+				res.status(201).send('[201] Utente aggiunto con successo.');
 			});
 		}
 	},);
@@ -45,30 +51,36 @@ const deleteUtente = (req, res) => {
 		if(error) throw error;
 		
 		if(results.rowCount === 0) {
-			res.status(404).send('Utente non trovato.');
+			res.status(404).send('[404] Utente non trovato.');
 		}
 
 		else {
-			res.status(200).send('Utente eliminato correttamente.');
+			res.status(200).send('[200] Utente eliminato con successo.');
 		}
 	});
 };
 
 
 const aggiornaPassword = (req, res) => {
+
+	if(req.body == null) {
+		res.status(400).send('[400] Richiesta non valida.');
+		return;
+	}
+
 	const username = req.params.username;
 	const newPassword = req.body;
 	pool.query(queries.getUtenteByUsername, [username], (error, results) => {
 		if(error) throw error;
 
 		if(results.rows.length > 0) {
-			res.status(404).send('Utente non trovato.');
+			res.status(404).send('[404] Utente non trovato.');
 		}
 
 		else {
 			pool.query(queries.aggiornaPassword, [username, newPassword], (error) => {
 				if(error) throw error;
-				res.status(201).send('Password modificata con successo.');
+				res.status(200).send('[200] Password modificata con successo.');
 			});
 		}
 	},);
