@@ -1,4 +1,28 @@
 <script>
+
+	import { RouterLink } from 'vue-router';
+	import { useSessionStore } from '@/stores/session';
+
+	export default {
+		components: {
+			RouterLink
+		},
+		data() {
+			return {
+				sessionStore: useSessionStore(),
+			}
+		},
+		methods: {
+			checkUser() {
+				if(this.sessionStore.getUser() == null) {
+					return false;
+				} else {
+					return true;
+				}
+			}
+		}
+	}
+
 </script>
 
 <template>

@@ -5,6 +5,7 @@ import ElencoView from '@/views/ElencoView.vue'
 import InserimentoView from '@/views/InserimentoView.vue'
 import AboutView from '@/views/AboutView.vue'
 import LoginView from '@/views/LoginView.vue'
+import ProfileView from '@/views/ProfileView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,6 +34,11 @@ const router = createRouter({
 			path: '/login',
 			name: 'login',
 			component: LoginView
+		},
+		{
+			path: '/profilo',
+			name: 'profilo',
+			component: ProfileView
 		}		
   ],
 })
