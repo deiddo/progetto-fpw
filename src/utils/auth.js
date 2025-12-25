@@ -21,7 +21,13 @@ const logout = async () => {
 	return await response.json();
 }
 
+const isLogged = async () => {
+	const response = await fetch('api/sessions/isLogged');
+	return await response.json();
+}
+
 export {
 	login,
 	logout,
+	isLogged,
 }

@@ -27,7 +27,17 @@ const logout = (req, res) => {
 }
 
 
+const isLogged = (req, res) => {
+	if(req.session.userID) {
+		res.status(200).json(req.session);
+	} else {
+		res.status(401).json({ message: 'Non sei loggato' });
+	}
+}
+
+
 module.exports = {
 	login,
 	logout,
+	isLogged,
 }

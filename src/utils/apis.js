@@ -8,7 +8,18 @@ const getListaProdotti = async () => {
     return await response.json();
 }
 
+const aggiungiProdotto = async () => {
+    const response = await fetch('api/prodotti', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({})
+    })
+}
+
 export {
     getProdottoById,
     getListaProdotti,
+    aggiungiProdotto,
 }
