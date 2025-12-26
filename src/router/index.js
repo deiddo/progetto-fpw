@@ -25,7 +25,7 @@ const router = createRouter({
 		{
 			path: '/inserimento',
 			name: 'inserimento',
-			component: InserimentoView
+			component: InserimentoView,
 		}, 
 		{
 			path: '/about',

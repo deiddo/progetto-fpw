@@ -4,22 +4,24 @@ const getProdottoById = async (id) => {
 }
 
 const getListaProdotti = async () => {
-    const response = await fetch(`api/prodotti`);
+    const response = await fetch(`api/prodotti/`);
     return await response.json();
 }
 
-const aggiungiProdotto = async () => {
-    const response = await fetch('api/prodotti', {
+const addProdotto = async (nome, descrizione, immagine, utente) => {
+    const response = await fetch('api/prodotti/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({})
-    })
+        body: JSON.stringify({ nome, descrizione, immagine, utente })
+    });
+
+	return await response.json();
 }
 
 export {
     getProdottoById,
     getListaProdotti,
-    aggiungiProdotto,
+    addProdotto,
 }

@@ -11,7 +11,7 @@ const login = (req, res) => {
 			req.session.userID = results.rows[0].username;
 			req.status(200).json(req.session);
 		} else {
-			res.status(401).json({message: 'Username o password errati'});
+			res.status(401).json({ message: 'Username o password errati' });
 		}
 	});
 }

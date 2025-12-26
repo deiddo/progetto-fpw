@@ -4,6 +4,18 @@
 	export default {
 		components: {
 			Card
+		},
+
+		data() {
+			return {
+				gruppoFPW: [
+					{
+						nome: "Alessandro Deidda",
+						descrizione: "provablabla",
+						immagine: "cacca.png"
+					}
+				]
+			}
 		}
 	}
 </script>
@@ -17,10 +29,7 @@
 
 
 	<article class="col-6">
-		<Card />
-		<Card />
-		<Card />
-		<Card />
+		<Card v-for="studente in gruppoFPW" :immagine="studente.immagine" :nome="studente.nome" :descrizione="studente.descrizione"/>
 	
 	</article>
 

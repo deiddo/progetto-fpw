@@ -1,12 +1,12 @@
 <script>
-
 	import { useSessionStore } from '@/stores/session';
 	import * as Auth from '@/utils/auth.js';
+	
 	export default {
 		data(){
 			return{
-				username:'',
-				sessionStore:useSessionStore(),
+				username: '',
+				sessionStore: useSessionStore(),
 			}
 		},
 		methods: {
@@ -19,7 +19,7 @@
 				this.username = this.sessionStore.getUser();
 			}
 		},
-		mounted(){
+		mounted() {
 			this.getUser();
 		}
 	}

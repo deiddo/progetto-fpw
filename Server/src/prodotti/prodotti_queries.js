@@ -1,9 +1,9 @@
 // Recupero prodotto/i
 const getListaProdotti = "SELECT * FROM prodotti ORDER BY id";
-const getProdottoById = "SELECT * FROM prodotti WHERE id = $1 ORDER BY id";
+const getProdottoById = "SELECT * FROM prodotti WHERE id = $1";
 
 // Aggiunta prodotto
-const addProdotto = "INSERT INTO prodotti (id, nome, descrizione, immagine) VALUES ($1, $2, $3, $4)";
+const addProdotto = "INSERT INTO prodotti (nome, descrizione, immagine, utente) VALUES ($1, $2, $3, $4)";
 
 // Cancellazione prodotto
 const deleteProdotto = "DELETE FROM prodotti WHERE id = $1";

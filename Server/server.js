@@ -12,14 +12,14 @@ app.get('/', (req, res) => {
 	res.send('Hello, World!');
 });
 
-app.use('/prodotti', prodottiRoutes);
-app.use('/utenti', utentiRoutes);
-
 app.use(session({
 	secret: 'secret',
 	resave: false,
 	saveUninitialized: true,
 	cookie: { maxAge: 300000, secure: false }
 }));
+
+app.use('/prodotti', prodottiRoutes);
+app.use('/utenti', utentiRoutes);
 
 app.listen(port, () => console.log(`Il server è attivo sulla porta ${port}.`));

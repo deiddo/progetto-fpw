@@ -1,5 +1,6 @@
 <script>
 	import * as Api from '@/utils/apis.js'
+	import { useSessionStore } from '@/stores/session';
 
 	import Card from '@/components/Card.vue';
 
@@ -10,7 +11,10 @@
 
 		data() {
 			return {
-				prodotti: []
+				prodotti: [],
+				numProdotti: 0,
+				messaggioDefault: "Nessun prodotto disponibile",
+				sessionStore: useSessionStore()
 			}
 		},
 
@@ -18,6 +22,7 @@
 			async getListaProdotti() {
 				const data = await Api.getListaProdotti();
 				this.prodotti = data;
+				this.numProdotti = data.length;
 			}
 		},
 
@@ -35,6 +40,9 @@
 	</aside>
 
 	<article class="col-6">
+
+		<Card v-if="numProdotti == 0" :nome="messaggioDefault"/>
+
 		<Card v-for="prodotto in prodotti" :key="prodotto.id" :immagine="prodotto.immagine" :nome="prodotto.nome" :descrizione="prodotto.descrizione"/>
 		
 

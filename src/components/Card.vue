@@ -4,7 +4,7 @@
 		props: {
 			immagine: {
 				type: String,
-				required: true
+				required: false
 			},
 
 			nome: {
@@ -14,7 +14,7 @@
 
 			descrizione: {
 				type: String,
-				required: true
+				required: false
 			}
 		}
 	}
@@ -25,7 +25,7 @@
 
 	<div class="card">
 
-		<div class="immagine">
+		<div v-show="immagine != null" class="immagine">
 			<img :src="immagine" alt="">
 		</div>
 
