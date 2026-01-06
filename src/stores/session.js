@@ -1,16 +1,23 @@
 import { ref } from 'vue';
 import { defineStore } from 'pinia';
 
-export const useSessionStore = defineStore('session', () => {
-	const userID = ref(null);
+export const useSessionStore = defineStore('session', {
+	state: () => ({
+		user: null,
+	}),
 
-	function setUser(value) {
-		userID.value = value;
-	}
+	actions: {
+		setUser(user) {
+			this.user = user;
+		},
 
-	function getUser() {
-		return userID.value;
-	}
+		getUser() {
+			return this.user;
+		}
+	},
 
-	return { userID, setUser, getUser };
-});
+	persist: {
+		storage: sessionStorage,
+		path: ['user'],
+	},
+})

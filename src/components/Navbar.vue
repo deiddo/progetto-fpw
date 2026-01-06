@@ -29,9 +29,9 @@
 	<nav>
 		<ul>
 			<li><RouterLink to="/">HOME</RouterLink></li>
-			<li><RouterLink to="/elenco">ELENCO</RouterLink></li>
-			<li><RouterLink to="/inserimento">INSERIMENTO</RouterLink></li>
-			<li><RouterLink to="/about">ABOUT</RouterLink></li>
+			<li v-show="checkUser()"><RouterLink to="/elenco">ELENCO</RouterLink></li>
+			<li v-show="checkUser()"><RouterLink to="/inserimento">INSERIMENTO</RouterLink></li>
+			<li><RouterLink to="/about">CHI SIAMO</RouterLink></li>
 			<li v-show="!checkUser()"><RouterLink to="/login">LOGIN</RouterLink></li>
 			<li v-show="checkUser()"><RouterLink to="/profilo">PROFILO</RouterLink></li>
 		</ul>

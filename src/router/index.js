@@ -15,33 +15,35 @@ const router = createRouter({
 		{
 			path: '/',
 			name: 'home',
-			component: HomeView
+			component: HomeView,
 		}, 
 		{
 			path: '/elenco',
 			name: 'elenco',
-			component: ElencoView
+			component: ElencoView,
+			meta: { requiresAuth: true },
 		}, 
 		{
 			path: '/inserimento',
 			name: 'inserimento',
 			component: InserimentoView,
+			meta: { requiresAuth: true },
 		}, 
 		{
 			path: '/about',
 			name: 'about',
-			component: AboutView
+			component: AboutView,
 		}, 
 		{
 			path: '/login',
 			name: 'login',
-			component: LoginView
+			component: LoginView,
 		},
 		{
 			path: '/profilo',
 			name: 'profilo',
 			component: ProfileView,
-			meta: { requiresAuth: true }
+			meta: { requiresAuth: true },
 		}		
   ],
 })

@@ -7,7 +7,7 @@
 		data() {
 			return {
 				username: '',
-				password: ''
+				password: '',
 			}
 		},
 
@@ -15,6 +15,8 @@
 			async login() {
 				console.log('Sono dentro login()');
 				const data = await Auth.login(this.username, this.password);
+
+				console.log(data);
 
 				if(data.userID) {
 					useSessionStore().setUser(data.userID);

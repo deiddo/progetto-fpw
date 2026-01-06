@@ -7,6 +7,7 @@ app.use(express.json());
 
 const prodottiRoutes = require('./src/prodotti/prodotti_routes');
 const utentiRoutes = require('./src/utenti/utenti_routes');
+const sessionRoutes = require('./src/sessions/session_routes');
 
 app.get('/', (req, res) => {
 	res.send('Hello, World!');
@@ -21,5 +22,6 @@ app.use(session({
 
 app.use('/prodotti', prodottiRoutes);
 app.use('/utenti', utentiRoutes);
+app.use('/sessions', sessionRoutes);
 
 app.listen(port, () => console.log(`Il server è attivo sulla porta ${port}.`));

@@ -1,3 +1,7 @@
+/*
+    Tabella prodotti
+*/
+
 const getProdottoById = async (id) => {
     const response = await fetch(`api/prodotti/${id}`);
     return await response.json();
@@ -20,8 +24,21 @@ const addProdotto = async (nome, descrizione, immagine, utente) => {
 	return await response.json();
 }
 
+
+
+/*
+    Tabella utenti
+*/
+
+const getUtenteByUsername = async (username) => {
+    const response = await fetch(`api/utenti/${username}`);
+    return await response.json();
+}
+
+
 export {
     getProdottoById,
     getListaProdotti,
     addProdotto,
+    getUtenteByUsername,
 }

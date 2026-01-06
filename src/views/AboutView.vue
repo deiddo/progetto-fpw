@@ -11,9 +11,23 @@
 				gruppoFPW: [
 					{
 						nome: "Alessandro Deidda",
+						descrizione: "provablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablabla",
+						immagine: "cacca.png"
+					},
+					{
+						nome: "Riccardo Cau",
+						descrizione: "provabbb",
+						immagine: "cacca.png"
+					},{
+						nome: "Francesco Mameli",
 						descrizione: "provablabla",
 						immagine: "cacca.png"
-					}
+					},
+					{
+						nome: "Gabriele Podda",
+						descrizione: "provabbb",
+						immagine: "cacca.png"
+					},
 				]
 			}
 		}

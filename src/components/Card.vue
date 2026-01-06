@@ -39,7 +39,7 @@
 			</div>
 		</div>
 
-		<div class="clear"></div>
+		<div class="clear" />
 
 	</div>
 
@@ -63,6 +63,7 @@
 
 	.nome, .descrizione {
 		display: block;
+		overflow-wrap: anywhere;
 	}
 
 	.nome p {
@@ -70,26 +71,6 @@
 		font-weight: bolder;
 	}
 
-
-	/* Media query per smartphone */
-	@media only screen and (max-width: 768px) {
-
-		.immagine {
-			width: 100%;
-			position: relative;
-			margin: 10% 0;
-			overflow: hidden;
-		}
-
-		.immagine img {
-			width: 300px;
-		}
-
-		.informazioni {
-			margin: 0;
-			text-align: center;
-		}
-	}
 
 	/* Media query per desktop */
 	@media only screen and (min-width: 768px) {
@@ -117,5 +98,24 @@
 	}
 
 
+	/* Media query per smartphone */
+	@media only screen and (max-width: 768px) {
+
+		.immagine {
+			width: 100%;
+			position: relative;
+			margin: 10% 0;
+			overflow: hidden;
+		}
+
+		.immagine img {
+			width: 300px;
+		}
+
+		.informazioni {
+			margin: 0;
+			text-align: center;
+		}
+	}
 
 </style>
