@@ -12,10 +12,10 @@
 
 		<div id="divComponenti">
 			<ul>
-				<li>ALESSANDRO DEIDDA</li>
-				<li>FRANCESCO MAMELI</li>
-				<li>GABRIELE PODDA</li>
-				<li>RICCARDO CAU</li>
+				<li>CAU RICCARDO</li>
+				<li>DEIDDA ALESSANDRO</li>
+				<li>MAMELI FRANCESCO</li>
+				<li>PODDA GABRIELE</li>
 				<li>email@a.a</li>
 			</ul>
 		</div>
@@ -55,7 +55,7 @@
 	@media only screen and (min-width: 768px) {
 		#divComponenti li {
 			display: inline;
-			margin-right: 5%;
+			margin-right: 2%;
 		}
 	}
 

@@ -13,6 +13,9 @@ const getListaProdotti = async () => {
 }
 
 const addProdotto = async (nome, descrizione, immagine, utente) => {
+
+	immagine = "/provasrc/" + immagine;
+
     const response = await fetch('api/prodotti/', {
         method: 'POST',
         headers: {
@@ -30,9 +33,26 @@ const addProdotto = async (nome, descrizione, immagine, utente) => {
     Tabella utenti
 */
 
+const getListaUtenti = async () => {
+	const response = await fetch(`api/utenti/`);
+	return await response.json();
+}
+
 const getUtenteByUsername = async (username) => {
     const response = await fetch(`api/utenti/${username}`);
     return await response.json();
+}
+
+const addUtente = async (username, password, nome, cognome, email, citta, data_nascita, sesso) => {
+	const response = await fetch('api/utenti/', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({  username, password, nome, cognome, email, citta, data_nascita, sesso })
+	});
+
+	return await response.json();
 }
 
 
@@ -40,5 +60,8 @@ export {
     getProdottoById,
     getListaProdotti,
     addProdotto,
+
+	getListaUtenti,
     getUtenteByUsername,
+	addUtente,
 }

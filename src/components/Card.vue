@@ -15,8 +15,13 @@
 			descrizione: {
 				type: String,
 				required: false
+			},
+
+			utente: {
+				type: String,
+				required: false
 			}
-		}
+		},
 	}
 
 </script>
@@ -35,7 +40,8 @@
 			</div>
 
 			<div class="descrizione">
-				<p>{{ descrizione }}</p> 
+				<p>{{ descrizione }}</p>
+				<p v-show="utente != null"><i>Aggiunto da {{ utente }}</i></p>
 			</div>
 		</div>
 

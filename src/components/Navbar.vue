@@ -7,11 +7,13 @@
 		components: {
 			RouterLink
 		},
+
 		data() {
 			return {
 				sessionStore: useSessionStore(),
 			}
 		},
+
 		methods: {
 			checkUser() {
 				if(this.sessionStore.getUser() == null) {
@@ -20,6 +22,10 @@
 					return true;
 				}
 			}
+		},
+
+		mounted() {
+			this.checkUser();
 		}
 	}
 

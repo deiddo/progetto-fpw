@@ -28,11 +28,17 @@
 			async addProdotto() {
 				
 				if(this.prodottoGiaPresente(this.nome)) {
-					alert('Prodotto già presente nel DB.');
+					alert('Nome del prodotto già utilizzato.');
+					return;
+				}
+
+				if(this.numCharNome == 0 || this.numCharDesc == 0) {
+					alert('Il nome del prodotto e/o la sua descrizione non possono essere vuoti.');
 					return;
 				}
 
 				const data = await Api.addProdotto(this.nome, this.descrizione, "/img.png", this.sessionStore.getUser());
+				
 				if(data) {
 					alert('Prodotto aggiunto correttamente.');
 					this.$router.push('/');
@@ -81,12 +87,13 @@
 			<h1>Aggiungi un nuovo oggetto al catalogo</h1>
 
 			<form action="prodotti" method="POST" id="inserimentoForm">
-				<label for="nome">Nome</label>
+
+				<b><label for="nome">Nome</label></b><br>
 				<input type="text" name="nome" id="nome" v-model="nome" @input="checkNumCharNome">
 				<p id="caratteri-nome">Caratteri: {{ nome.length }}/{{ maxCharNome }}</p>
 				<br><br>
 
-				<label for="descrizione">Descrizione</label>
+				<b><label for="descrizione">Descrizione</label></b><br>
 				<textarea name="descrizione" id="descrizione" v-model="descrizione" @input="checkNumCharDesc"></textarea>
 				<p id="caratteri-descrizione">Caratteri: {{ descrizione.length }}/{{ maxCharDesc }}</p>
 				<br><br>
@@ -102,7 +109,7 @@
 
 <style scoped>
 
-	h1, #inserimentoForm {
+	h1, #inserimentoForm, input[type="text"], textarea {
 		font-family: sans-serif;
 	}
 
@@ -113,16 +120,17 @@
 	#inserimentoForm {
 		text-align: center;
 		background: rgba(83, 83, 83, 0.3);
-		transform: translate(-50%, -50%);
 		border-radius: 25px;
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 
 		position: relative;
 		left: 50%;
+		transform: translate(-50%, -50%);
 
 		padding: 20px 70px;
 		margin: 0;
 	}
+
 
 	/* Media query per desktop*/
 	@media only screen and (min-width: 768px) {
@@ -136,6 +144,7 @@
 
 			width: 30%;
 		}
+
 	}
 
 
@@ -148,6 +157,11 @@
 
 		#inserimentoForm {
 			top: 40%;
+		}
+
+		input[type="text"], textarea {
+			width: 80%;
+			padding: 5px;
 		}
 	}
 
