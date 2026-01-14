@@ -12,9 +12,7 @@
 				sessionStore: useSessionStore(),
 				prodotti: [],
 
-				numCharNome: 0,
 				maxCharNome: 64,
-				numCharDesc: 0,
 				maxCharDesc: 256,
 			}
 		},
@@ -23,12 +21,12 @@
 
 			async addProdotto() {
 
-				if(this.numCharNome == 0 || this.numCharDesc == 0) {
+				if(this.nome.length == 0 || this.descrizione.length == 0) {
 					alert('Il nome del prodotto e/o la sua descrizione non possono essere vuoti.');
 					return;
 				}
 
-				const data = await Api.addProdotto(this.nome, this.descrizione, "/img.png", this.sessionStore.getUser());
+				const data = await Api.addProdotto(this.nome, this.descrizione, "placeholder.jpeg", this.sessionStore.getUser());
 				
 				if(data) {
 					alert('Prodotto aggiunto correttamente.');
@@ -51,10 +49,6 @@
 				}
 			}
 		},
-
-		mounted() {
-			this.getListaProdotti();
-		}
 	}
 
 </script>

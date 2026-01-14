@@ -14,7 +14,7 @@ const getListaProdotti = async () => {
 
 const addProdotto = async (nome, descrizione, immagine, utente) => {
 
-	immagine = "/provasrc/" + immagine;
+	immagine = "/src/assets/img/oggetti/" + immagine;
 
     const response = await fetch('api/prodotti/', {
         method: 'POST',

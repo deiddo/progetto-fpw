@@ -93,7 +93,6 @@
 		}
 
 		.informazioni {
-			float: left;
 			height: 100%;
 			margin-left: 5%;
 		}
