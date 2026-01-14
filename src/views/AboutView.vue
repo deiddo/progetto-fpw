@@ -11,22 +11,22 @@
 				gruppoFPW: [
 					{
 						nome: "Alessandro Deidda",
-						descrizione: "provablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablablaprovablabla",
-						immagine: "cacca.png"
+						descrizione: "provabb",
+						immagine: "il.png"
 					},
 					{
 						nome: "Riccardo Cau",
 						descrizione: "provabbb",
-						immagine: "cacca.png"
+						immagine: "li.png"
 					},{
 						nome: "Francesco Mameli",
 						descrizione: "provablabla",
-						immagine: "cacca.png"
+						immagine: "il.png"
 					},
 					{
 						nome: "Gabriele Podda",
 						descrizione: "provabbb",
-						immagine: "cacca.png"
+						immagine: "li.png"
 					},
 				]
 			}
@@ -37,8 +37,8 @@
 
 <template>
 
-	<aside class="col-3 pubb">
-		<img src="../assets/img/pubb.png" alt="">
+	<aside class="col-3" id="a">
+		<p>a</p>
 	</aside>
 
 
@@ -56,9 +56,5 @@
 
 
 <style scoped>
-
-	
-
-
 
 </style>

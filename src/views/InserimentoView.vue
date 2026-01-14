@@ -20,17 +20,8 @@
 		},
 
 		methods: {
-			async getListaProdotti() {
-				const data = await Api.getListaProdotti();
-				this.prodotti = data;
-			},
 
 			async addProdotto() {
-				
-				if(this.prodottoGiaPresente(this.nome)) {
-					alert('Nome del prodotto già utilizzato.');
-					return;
-				}
 
 				if(this.numCharNome == 0 || this.numCharDesc == 0) {
 					alert('Il nome del prodotto e/o la sua descrizione non possono essere vuoti.');
@@ -46,16 +37,6 @@
 					console.log(data);
 					alert('Errore');
 				}
-			},
-
-			prodottoGiaPresente(nomeForm) {
-				for(let prodotto of this.prodotti) {
-					if(nomeForm == prodotto.nome) {
-						return true;
-					}
-				}
-
-				return false;
 			},
 
 			checkNumCharNome() {

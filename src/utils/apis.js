@@ -43,13 +43,13 @@ const getUtenteByUsername = async (username) => {
     return await response.json();
 }
 
-const addUtente = async (username, password, nome, cognome, email, citta, data_nascita, sesso) => {
+const addUtente = async (username, password, nome, cognome, email, citta, eta, sesso) => {
 	const response = await fetch('api/utenti/', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({  username, password, nome, cognome, email, citta, data_nascita, sesso })
+		body: JSON.stringify({  username, password, nome, cognome, email, citta, eta, sesso })
 	});
 
 	return await response.json();

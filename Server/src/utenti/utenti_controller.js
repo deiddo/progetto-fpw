@@ -26,7 +26,7 @@ const addUtente = (req, res) => {
 		return;
 	}
 
-	const { username, password, nome, cognome, email, citta, data_nascita, sesso } = req.body;
+	const { username, password, nome, cognome, email, citta, eta, sesso } = req.body;
 	pool.query(queries.getUtenteByUsername, [username], (error, results) => {
 		if(error) throw error;
 
@@ -35,7 +35,7 @@ const addUtente = (req, res) => {
 		}
 
 		else {
-			pool.query(queries.addUtente, [username, password, nome, cognome, email, citta, data_nascita, sesso], (error) => {
+			pool.query(queries.addUtente, [username, password, nome, cognome, email, citta, eta, sesso], (error) => {
 				if(error) throw error;
 				res.status(201).send('[201] Utente aggiunto con successo.');
 			});

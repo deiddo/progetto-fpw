@@ -13,7 +13,7 @@
 				cognome: '',
 				email: '',
 				citta: '',
-				data_nascita: '',
+				eta: 0,
 				sesso: 0,
 			}
 		},
@@ -31,8 +31,10 @@
 			async getDatiUtente() {
 				let data = (await Api.getUtenteByUsername(this.username))[0];
 				
-				[ this.nome, this.cognome, this.email, this.citta, this.data_nascita, this.sesso ] =
-				[ data.nome, data.cognome, data.email, data.citta, Date(data.data_nascita), data.sesso ];
+				[ this.nome, this.cognome, this.email, this.citta, this.eta, this.sesso ] =
+				[ data.nome, data.cognome, data.email, data.citta, data.eta, data.sesso ];
+
+				console.log(data);
 			},			
 		},
 		mounted() {
@@ -45,7 +47,7 @@
 
 <template>
 	<h1>Profilo</h1>
-	<p>Benvenuto {{  nome  }} {{ cognome }}, nato il {{ data_nascita }}</p>
+	<p>Benvenuto {{  nome  }} {{ cognome }}, hai {{ eta }} anni</p>
 	<button @click="logout()">Logout</button>
 </template>
 

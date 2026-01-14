@@ -52,7 +52,7 @@ input, textarea {
 	}
 
 
-/*	Visualizzazione desktop: tre colonne disposte in orizzontale	*/
+/* Layout a colonne per desktop */
 @media only screen and (min-width: 768px) {
 	[class*="col-"] {
 		float: left;
@@ -60,7 +60,7 @@ input, textarea {
 	}
 }
 
-/*	Visualizzazione smartphone: tre colonne disposte in verticale	*/
+/* Layout a colonne per smartphone */
 @media only screen and (max-width: 768px) {
 	[class*="col-"] {
 		float: none;

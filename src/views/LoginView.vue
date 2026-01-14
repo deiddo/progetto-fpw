@@ -10,23 +10,20 @@
 
 				utenti: [],
 
-				usernameLogin: '',
-				passwordLogin: '',
+				usernameLogin: '',					numCharUNL: 0,		maxCharUNPW: 32,
+				passwordLogin: '',					numCharPWL: 0,
 
-				usernameRegistrazione: '',
-				passwordRegistrazione: '',
-				nome: '',
-				cognome: '',
-				email: '',
-				citta: '',
-				data_nascita: '',
-				sesso: '',
+				usernameRegistrazione: '',			numCharUNR: 0,
+				passwordRegistrazione: '',			numCharPWR: 0,
+				confermaPswRegistrazione: '',		numCharPWC: 0,
+				nome: '',							numCharNome: 0,		maxCharNomeCogn: 64,
+				cognome: '',						numCharCogn: 0,
+				email: '',							numCharMail: 0,		maxCharMailCitta: 128,
+				citta: '',							numCharCitta: 0,
+				eta: 0,								minEta: 12,			maxEta: 99,
+				sesso: 0,
 
 				registrazione: false,
-				buttonText: '',
-
-				loginText: 'Hai già un account? Accedi',
-				registrazioneText: 'Non hai un account? Creane uno',
 			}
 		},
 
@@ -37,22 +34,21 @@
 				if(data.userID) {
 					useSessionStore().setUser(data.userID);
 					this.$router.push('/');
-				} else if (this.usernameGiaPresente(this.usernameLogin)) {
-					alert('Password errata.');
 				} else {
-					alert('Account non esistente.');
+					const user = await Api.getUtenteByUsername(this.usernameLogin);
+
+					if(!user[0]) {
+						alert('Utente non registrato.');
+					} else {
+						alert('Password errata.');
+					}
 				}
 			},
 
 			async addUtente() {
-
-				if(this.usernameGiaPresente(this.usernameRegistrazione)) {
-					alert('Nome utente già in uso.');
-					return;
-				}
-
-				const data = await Api.addUtente(this.usernameRegistrazione, this.passwordRegistrazione, this.nome, this.cognome, this.email, this.citta, this.data_nascita, this.sesso);
-	
+				
+				const data = await Api.addUtente(this.usernameRegistrazione, this.passwordRegistrazione, this.nome, this.cognome, this.email, this.citta, this.eta, this.sesso);
+				
 				if(data) {
 					alert('Account creato correttamente.');
 					this.$router.push('/');
@@ -62,39 +58,16 @@
 				}
 			},
 
-			async getListaUtenti() {
-				const data = await Api.getListaUtenti();
-				this.utenti = data;
-			},
-
-			usernameGiaPresente(username) {
-				for(let utente of this.utenti) {
-					if(username == utente.username) {
-						return true;
-					}
-				}
-
-				return false;
-			},
-
 			toggleRegistrazione() {
-
 				if(this.registrazione) {
 					this.registrazione = false;
-					this.buttonText = this.registrazioneText;
 				}
 
 				else {
 					this.registrazione = true;
-					this.buttonText = this.loginText;
 				}
 			}
 		},
-
-		mounted() {
-			this.getListaUtenti();
-			this.buttonText = this.registrazioneText;
-		}
 	}
 
 </script>
@@ -104,13 +77,13 @@
 
 	<article class="col-12">
 
-		<button id="toggle" @click="toggleRegistrazione()">{{ buttonText }}</button>
-
 		<div v-show="!registrazione" id="loginContent">
 
 			<form action="login" method="POST" id="loginForm">
 
-				<h1 id="loginTitle">Accedi</h1>
+				<h1 class="title">Accedi</h1>
+				<button class="toggle" @click.stop.prevent="toggleRegistrazione()">Non hai un account? Creane uno</button><br><br>
+
 				<b><label for="username">Nome utente</label></b><br>
 				<input type="text" name="usernameLogin" id="usernameLogin" v-model="usernameLogin">
 				<br><br>
@@ -124,20 +97,52 @@
 		</div>
 
 
-		<div v-show="registrazione" id="loginContent">
+		<div v-show="registrazione" id="registrazioneContent">
 
-			<form action="login" method="POST" id="loginForm">
+			<form action="utenti" method="POST" id="registrazioneForm">
 
-				<h1 id="loginTitle">Registrati</h1>
+				<h1 class="title">Registrati</h1>
+				<button class="toggle" @click.stop.prevent="toggleRegistrazione()">Hai già un account? Accedi ora</button><br><br>
+
 				<b><label for="username">Nome utente</label></b><br>
 				<input type="text" name="username" id="username" v-model="usernameRegistrazione">
 				<br><br>
 
-				<b><label for="password">Password</label></b><br>
-				<input type="password" name="password" id="password" v-model="passwordRegistrazione">
+				<b><label for="password">Password (conferma due volte)</label></b><br>
+				<input type="password" name="password" id="password" v-model="passwordRegistrazione"><br>
+				<input type="password" name="conferma-password" id="conferma-password" v-model="confermaPswRegistrazione">
 				<br><br>
 
-				<input type="submit" value="Accedi" @click.stop.prevent="login()" />
+				<b><label for="nome">Nome</label></b><br>
+				<input type="text" name="nome" id="nome" v-model="nome">
+				<br><br>
+
+				<b><label for="cognome">Cognome</label></b><br>
+				<input type="text" name="cognome" id="cognome" v-model="cognome">
+				<br><br>
+
+				<b><label for="email">Indirizzo email</label></b><br>
+				<input type="email" name="email" id="email" v-model="email">
+				<br><br>
+
+				<b><label for="email">Città</label></b><br>
+				<input type="text" name="citta" id="citta" v-model="citta">
+				<br><br>
+
+				<b><label for="eta">Età</label></b><br>
+				<input type="number" name="eta" id="eta" v-model="eta">
+				<br><br>
+
+				<p><b>Sesso</b></p>
+				<label for="uomo">Uomo</label>
+				<input type="radio" name="sesso" id="uomo" value="1" v-model="sesso">
+
+				<label for="donna">Donna</label>
+				<input type="radio" name="sesso" id="donna" value="2" v-model="sesso">
+				<br><br>
+				
+
+				<input type="submit" value="Registrati" @click.stop.prevent="addUtente()" />
 			</form>
 		</div>
 
@@ -150,24 +155,19 @@
 
 <style scoped>
 
-	#loginTitle, #toggle, #loginForm, input[type="text"], input[type="password"] {
+	.title, #toggle, #loginForm, #registrazioneForm, input {
 		font-family: sans-serif;
 	}
 
-	#loginContent {
+	#loginContent, #registrazioneContent {
 		text-align: center;
 	}
 
-	#toggle {
-		position: relative;
-		left: 50%;
-		transform: translateX(-50%);
-
+	.toggle {
 		color: black;
 	}
 
-	#loginForm {
-		text-align: center;
+	#loginForm, #registrazioneForm {
 		background: rgba(83, 83, 83, 0.3);
 		border-radius: 25px;
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -185,15 +185,22 @@
 	@media only screen and (min-width: 768px) {
 
 		#loginContent {
-			height: 600px;
+			height: 650px;
 		}
 
 		#loginForm {
-			top: 30%;
-
+			top: 45%;
 			width: 30%;
 		}
 
+		#registrazioneContent {
+			height: 850px;
+		}
+
+		#registrazioneForm {
+			top: 55%;
+			width: 30%;
+		}
 	}
 
 
@@ -206,6 +213,14 @@
 
 		#loginForm {
 			top: 40%;
+		}
+
+		#registrazioneContent {
+			height: 850px;
+		}
+
+		#registrazioneForm {
+			top: 50%;
 		}
 
 		input[type="text"], input[type="password"] {

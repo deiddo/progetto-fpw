@@ -12,10 +12,10 @@
 
 		<div id="divComponenti">
 			<ul>
-				<li>CAU RICCARDO</li>
-				<li>DEIDDA ALESSANDRO</li>
-				<li>MAMELI FRANCESCO</li>
-				<li>PODDA GABRIELE</li>
+				<li>Cau Riccardo</li>
+				<li>Deidda Alessandro</li>
+				<li>Mameli Francesco</li>
+				<li>Podda Gabriele</li>
 				<li>email@a.a</li>
 			</ul>
 		</div>
