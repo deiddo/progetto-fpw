@@ -22,14 +22,14 @@ const getProdottoById = (req, res) => {
 const addProdotto = (req, res) => {
 
 	if(req.body == null) {
-		res.status(400).json('[400] Richiesta non valida.');
+		res.status(400).json({ message: '[400] Richiesta non valida.' });
 		return;
 	}
 
 	const { nome, descrizione, immagine, utente } = req.body;
 	pool.query(queries.addProdotto, [ nome, descrizione, immagine, utente ], (error) => {
 		if(error) throw error;
-		res.status(201).json('[201] Prodotto aggiunto con successo.');
+		res.status(201).json({ message: '[201] Prodotto aggiunto con successo.' });
 	});
 };
 
@@ -41,11 +41,11 @@ const deleteProdotto = (req, res) => {
 		if(error) throw error;
 		
 		if(results.rowCount === 0) {
-			res.status(404).json('[404] Prodotto non trovato.');
+			res.status(404).json({ message: '[404] Prodotto non trovato.' });
 		}
 
 		else {
-			res.status(200).json('[200] Prodotto eliminato con successo.');
+			res.status(200).json({ message: '[200] Prodotto eliminato con successo.' });
 		}
 	});
 };
@@ -54,7 +54,7 @@ const deleteProdotto = (req, res) => {
 const updateProdotto = (req, res) => {
 
 	if(req.body == null) {
-		res.status(400).json('[400] Richiesta non valida.');
+		res.status(400).json({ message: '[400] Richiesta non valida.' });
 		return;
 	}
 
@@ -65,13 +65,13 @@ const updateProdotto = (req, res) => {
 		if(error) throw error;
 
 		if(results.rows.length === 0) {
-			res.status(404).json('[404] Prodotto non trovato.');
+			res.status(404).json({ message: '[404] Prodotto non trovato.' });
 		}
 
 		else {
 			pool.query(queries.updateProdotto, [id, nome, descrizione, immagine], (error) => {
 				if(error) throw error;
-				res.status(200).json('[200] Prodotto aggiornato con successo.');
+				res.status(200).json({ message: '[200] Prodotto aggiornato con successo.' });
 			});
 		}
 	},);

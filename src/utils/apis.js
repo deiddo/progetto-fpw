@@ -49,10 +49,23 @@ const addUtente = async (username, password, nome, cognome, email, citta, eta, s
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({  username, password, nome, cognome, email, citta, eta, sesso })
+		body: JSON.stringify({ username, password, nome, cognome, email, citta, eta, sesso })
 	});
 
 	return await response.json();
+}
+
+const aggiornaPassword = async (username, newPassword) => {
+
+    const response = await fetch(`api/utenti/${username}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ newPassword })
+    });
+
+    return await response.json();
 }
 
 
@@ -64,4 +77,5 @@ export {
 	getListaUtenti,
     getUtenteByUsername,
 	addUtente,
+    aggiornaPassword,
 }

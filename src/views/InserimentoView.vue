@@ -64,16 +64,16 @@
 			<form action="prodotti" method="POST" id="inserimentoForm">
 
 				<b><label for="nome">Nome</label></b><br>
-				<input type="text" name="nome" id="nome" v-model="nome" @input="checkNumCharNome">
+				<input type="text" name="nome" id="nome" v-model="nome" @input="checkNumCharNome()">
 				<p id="caratteri-nome">Caratteri: {{ nome.length }}/{{ maxCharNome }}</p>
 				<br><br>
 
 				<b><label for="descrizione">Descrizione</label></b><br>
-				<textarea name="descrizione" id="descrizione" v-model="descrizione" @input="checkNumCharDesc"></textarea>
+				<textarea name="descrizione" id="descrizione" v-model="descrizione" @input="checkNumCharDesc()"></textarea>
 				<p id="caratteri-descrizione">Caratteri: {{ descrizione.length }}/{{ maxCharDesc }}</p>
 				<br><br>
 
-				<input type="submit" value="Conferma" @click.stop.prevent="addProdotto()" />
+				<input type="submit" value="Conferma" class="button" @click.stop.prevent="addProdotto()" />
 			</form>
 		</div>
 		

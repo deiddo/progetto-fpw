@@ -12,13 +12,14 @@
 					{
 						nome: "Alessandro Deidda",
 						descrizione: "provabb",
-						immagine: "il.png"
+						immagine: "/src/assets/img/oggetti/caravali.jpeg"
 					},
 					{
 						nome: "Riccardo Cau",
 						descrizione: "provabbb",
 						immagine: "li.png"
-					},{
+					},
+					{
 						nome: "Francesco Mameli",
 						descrizione: "provablabla",
 						immagine: "il.png"

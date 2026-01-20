@@ -9,11 +9,19 @@ body {
 	overflow-x: hidden;
 }
 
-/*	Relativo al testo	*/
-* {
+a:link {
+	color: white;
 	text-decoration: none;
-	color: var(--bianco);
 }
+
+p, h1, label, a {
+	color: white;
+}
+
+.title {
+	
+}
+
 
 /*	Relativo all'impostazione delle pagine (layout a colonne)	*/
 * {
@@ -86,4 +94,24 @@ input, textarea {
 	.pubb img {
 		width: auto;
 	}
+}
+
+/*	FINE TODO	*/
+
+
+.button {
+	padding: 4px 10px;
+
+	font-size: large;
+	color: black;
+
+	border-color: transparent;
+	border-style: solid;
+	border-radius: 15px;
+}
+
+.button:hover {
+	cursor: pointer;
+	background-color: var(--oro);
+	color: white;
 }

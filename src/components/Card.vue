@@ -30,16 +30,14 @@
 
 	<div class="card">
 
-		<div v-show="immagine != null" class="immagine">
-			<img :src="immagine" alt="">
-		</div>
+		<img v-show="immagine != null" :src="immagine"  class="immagine">
 
 		<div class="informazioni">
 			<div class="nome">
 				<p>{{ nome }}</p>
 			</div>
 
-			<div class="descrizione">
+			<div v-show="descrizione != null" class="descrizione">
 				<p>{{ descrizione }}</p>
 				<p v-show="utente != null"><i>Aggiunto da {{ utente }}</i></p>
 			</div>
@@ -55,21 +53,16 @@
 
 	.card {
 		margin: 10px 0;
-		padding: 2% 10%;
+		padding: 2% 5%;
+		border-radius: 15px;
 
 		background-color: var(--rossoScuro);
 		color: var(--bianco);
 		font-family: sans-serif;
 	}
 
-	.immagine {
-		height: 100%;
-		text-align: center;
-	}
-
 	.nome, .descrizione {
 		display: block;
-		overflow-wrap: anywhere;
 	}
 
 	.nome p {
@@ -83,18 +76,11 @@
 
 		.immagine {
 			float: left;
-			width: 35%;
-
-			overflow: hidden;
-		}
-
-		.immagine img {
-			width: 300px;
+			margin-right: 5%;
 		}
 
 		.informazioni {
 			height: 100%;
-			margin-left: 5%;
 		}
 
 		.clear {
@@ -105,20 +91,14 @@
 
 	/* Media query per smartphone */
 	@media only screen and (max-width: 768px) {
-
 		.immagine {
 			width: 100%;
-			position: relative;
 			margin: 10% 0;
-			overflow: hidden;
-		}
-
-		.immagine img {
-			width: 300px;
+			
+			text-align: center;
 		}
 
 		.informazioni {
-			margin: 0;
 			text-align: center;
 		}
 	}

@@ -4,22 +4,19 @@
 
 <template>
 	<header>
-		<div class="container">
-			<div id="divLogo">
-				<RouterLink to="/"><img src="../assets/img/logo.png" alt="Logo Spoti Pati" id="logo"></RouterLink>
-			</div>
-
-			<div id="divTitle">
-				<p class="title">SPOTI PATI</p>
-				<p class="subtitle">Museo virtuale di oggetti strani</p>
-			</div>
+		<div id="divLogo">
+			<RouterLink to="/"><img src="../assets/img/logo.png" alt="Logo Spoti Pati" id="logo"></RouterLink>
 		</div>
+
+		<p class="nomeSito">SPOTI PATI</p>
+		<p class="subtitle">Museo virtuale di oggetti strani</p>
+		
 	</header>
 </template>
 
 <style scoped>
 
-	.container {
+	header {
 		margin: 0;
 		padding-top: 15px;
 
@@ -32,11 +29,11 @@
 		background-color: var(--neroSfondo);
 	}
 
-	.title {
+	.nomeSito {
 		margin: 0;
 		
 		font-weight: bolder;
-		color: var(--coloreTitolo);
+		color: var(--oro);
 	}
 
 	.subtitle {
@@ -50,7 +47,7 @@
 			float: left;
 		}
 
-		.title {
+		.nomeSito {
 			font-size: 4em;
 		}
 	}
@@ -68,7 +65,7 @@
 			margin: auto;
 		}
 		
-		.title {
+		.nomeSito {
 			text-align: center;
 			font-size: 3em;
 		}
@@ -76,8 +73,6 @@
 		.subtitle {
 			display: none;
 		}
-
-		
 	}
 
 

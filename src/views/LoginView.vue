@@ -10,18 +10,18 @@
 
 				utenti: [],
 
-				usernameLogin: '',					numCharUNL: 0,		maxCharUNPW: 32,
-				passwordLogin: '',					numCharPWL: 0,
+				usernameLogin: '',					maxCharUNPW: 32,
+				passwordLogin: '',
 
-				usernameRegistrazione: '',			numCharUNR: 0,
-				passwordRegistrazione: '',			numCharPWR: 0,
-				confermaPswRegistrazione: '',		numCharPWC: 0,
-				nome: '',							numCharNome: 0,		maxCharNomeCogn: 64,
-				cognome: '',						numCharCogn: 0,
-				email: '',							numCharMail: 0,		maxCharMailCitta: 128,
-				citta: '',							numCharCitta: 0,
+				usernameRegistrazione: '',
+				passwordRegistrazione: '',
+				confermaPswRegistrazione: '',
+				nome: '',							maxCharNomeCogn: 64,
+				cognome: '',
+				email: '',							maxCharMailCitta: 128,
+				citta: '',
 				eta: 0,								minEta: 12,			maxEta: 99,
-				sesso: 0,
+				sesso: null,
 
 				registrazione: false,
 			}
@@ -46,7 +46,12 @@
 			},
 
 			async addUtente() {
-				
+
+				if(this.passwordRegistrazione != this.confermaPswRegistrazione) {
+					alert('Le due password non corrispondono.');
+					return;
+				}
+
 				const data = await Api.addUtente(this.usernameRegistrazione, this.passwordRegistrazione, this.nome, this.cognome, this.email, this.citta, this.eta, this.sesso);
 				
 				if(data) {
@@ -79,10 +84,10 @@
 
 		<div v-show="!registrazione" id="loginContent">
 
-			<form action="login" method="POST" id="loginForm">
+			<form action="login" method="POST" class="form" id="loginForm">
 
 				<h1 class="title">Accedi</h1>
-				<button class="toggle" @click.stop.prevent="toggleRegistrazione()">Non hai un account? Creane uno</button><br><br>
+				<p class="toggle" @click.stop.prevent="toggleRegistrazione()"><i>Non hai un account? <b>Creane uno</b></i></p><br>
 
 				<b><label for="username">Nome utente</label></b><br>
 				<input type="text" name="usernameLogin" id="usernameLogin" v-model="usernameLogin">
@@ -92,46 +97,49 @@
 				<input type="password" name="passwordLogin" id="passwordLogin" v-model="passwordLogin">
 				<br><br>
 
-				<input type="submit" value="Accedi" @click.stop.prevent="login()" />
+				<input type="submit" value="Accedi" class="button" @click.stop.prevent="login()" />
 			</form>
 		</div>
 
 
 		<div v-show="registrazione" id="registrazioneContent">
 
-			<form action="utenti" method="POST" id="registrazioneForm">
+			<form action="utenti" method="POST" class="form" id="registrazioneForm">
 
 				<h1 class="title">Registrati</h1>
-				<button class="toggle" @click.stop.prevent="toggleRegistrazione()">Hai già un account? Accedi ora</button><br><br>
+				<p class="toggle" @click.stop.prevent="toggleRegistrazione()"><i>Hai già un account? <b>Accedi ora</b></i></p><br>
 
-				<b><label for="username">Nome utente</label></b><br>
+				<b><label for="username">Nome utente ({{ usernameRegistrazione.length }} / {{ maxCharUNPW }})</label></b><br>
 				<input type="text" name="username" id="username" v-model="usernameRegistrazione">
 				<br><br>
 
-				<b><label for="password">Password (conferma due volte)</label></b><br>
-				<input type="password" name="password" id="password" v-model="passwordRegistrazione"><br>
+				<b><label for="password">Password ({{ passwordRegistrazione.length }} / {{ maxCharUNPW }})</label></b><br>
+				<input type="password" name="password" id="password" v-model="passwordRegistrazione">
+				<br><br>
+
+				<b><label for="conferma-password">Conferma password ({{ confermaPswRegistrazione.length }} / {{ maxCharUNPW }})</label></b><br>
 				<input type="password" name="conferma-password" id="conferma-password" v-model="confermaPswRegistrazione">
 				<br><br>
 
-				<b><label for="nome">Nome</label></b><br>
+				<b><label for="nome">Nome ({{ nome.length }} / {{ maxCharNomeCogn }})</label></b><br>
 				<input type="text" name="nome" id="nome" v-model="nome">
 				<br><br>
 
-				<b><label for="cognome">Cognome</label></b><br>
+				<b><label for="cognome">Cognome ({{ cognome.length }} / {{ maxCharNomeCogn }})</label></b><br>
 				<input type="text" name="cognome" id="cognome" v-model="cognome">
 				<br><br>
 
-				<b><label for="email">Indirizzo email</label></b><br>
+				<b><label for="email">Indirizzo email ({{ email.length }} / {{ maxCharMailCitta }})</label></b><br>
 				<input type="email" name="email" id="email" v-model="email">
 				<br><br>
 
-				<b><label for="email">Città</label></b><br>
+				<b><label for="email">Città ({{ citta.length }} / {{ maxCharMailCitta }})</label></b><br>
 				<input type="text" name="citta" id="citta" v-model="citta">
 				<br><br>
 
 				<b><label for="eta">Età</label></b><br>
 				<input type="number" name="eta" id="eta" v-model="eta">
-				<br><br>
+				<br>
 
 				<p><b>Sesso</b></p>
 				<label for="uomo">Uomo</label>
@@ -142,7 +150,7 @@
 				<br><br>
 				
 
-				<input type="submit" value="Registrati" @click.stop.prevent="addUtente()" />
+				<input type="submit" value="Registrati" class="button" @click.stop.prevent="addUtente()" />
 			</form>
 		</div>
 
@@ -155,7 +163,7 @@
 
 <style scoped>
 
-	.title, #toggle, #loginForm, #registrazioneForm, input {
+	.title, .form, #toggle, input {
 		font-family: sans-serif;
 	}
 
@@ -164,10 +172,10 @@
 	}
 
 	.toggle {
-		color: black;
+		cursor: pointer;
 	}
 
-	#loginForm, #registrazioneForm {
+	.form {
 		background: rgba(83, 83, 83, 0.3);
 		border-radius: 25px;
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -176,12 +184,17 @@
 		left: 50%;
 		transform: translate(-50%, -50%);
 
-		padding: 20px 70px;
+		padding: 10px 70px;
 		margin: 0;
+	}
+	
+
+	input[type="text"], input[type="password"], input[type="email"], input[type="number"] {
+		width: 80%;
 	}
 
 
-	/* Media query per desktop*/
+	/* Media query per desktop */
 	@media only screen and (min-width: 768px) {
 
 		#loginContent {
@@ -198,7 +211,7 @@
 		}
 
 		#registrazioneForm {
-			top: 55%;
+			top: 58%;
 			width: 30%;
 		}
 	}
@@ -223,8 +236,7 @@
 			top: 50%;
 		}
 
-		input[type="text"], input[type="password"] {
-			width: 80%;
+		input[type="text"], input[type="password"], input[type="email"], input[type="number"] {
 			padding: 5px;
 		}
 	}

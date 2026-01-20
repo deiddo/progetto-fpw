@@ -22,7 +22,7 @@ const getUtenteByUsername = (req, res) => {
 const addUtente = (req, res) => {
 
 	if(req.body == null) {
-		res.status(400).send('[400] Richiesta non valida.');
+		res.status(400).json({ message: '[400] Richiesta non valida.' });
 		return;
 	}
 
@@ -31,13 +31,13 @@ const addUtente = (req, res) => {
 		if(error) throw error;
 
 		if(results.rows.length > 0) {
-			res.status(400).send('[400] Nome utente non disponibile.');
+			res.status(400).json({ message: '[400] Nome utente non disponibile.' });
 		}
 
 		else {
 			pool.query(queries.addUtente, [username, password, nome, cognome, email, citta, eta, sesso], (error) => {
 				if(error) throw error;
-				res.status(201).send('[201] Utente aggiunto con successo.');
+				res.status(201).json({ message: '[201] Utente aggiunto con successo.' });
 			});
 		}
 	},);
@@ -51,11 +51,11 @@ const deleteUtente = (req, res) => {
 		if(error) throw error;
 		
 		if(results.rowCount === 0) {
-			res.status(404).send('[404] Utente non trovato.');
+			res.status(404).json({ message: '[404] Utente non trovato.' });
 		}
 
 		else {
-			res.status(200).send('[200] Utente eliminato con successo.');
+			res.status(200).json({ message:'[200] Utente eliminato con successo.' });
 		}
 	});
 };
@@ -64,23 +64,23 @@ const deleteUtente = (req, res) => {
 const aggiornaPassword = (req, res) => {
 
 	if(req.body == null) {
-		res.status(400).send('[400] Richiesta non valida.');
+		res.status(400).json({ message: '[400] Richiesta non valida.' });
 		return;
 	}
 
 	const username = req.params.username;
-	const newPassword = req.body;
+	const newPassword = req.body.newPassword;
 	pool.query(queries.getUtenteByUsername, [username], (error, results) => {
 		if(error) throw error;
 
-		if(results.rows.length > 0) {
-			res.status(404).send('[404] Utente non trovato.');
+		if(results.rows.length == 0) {
+			res.status(404).json({ message: '[404] Utente non trovato.' });
 		}
 
 		else {
 			pool.query(queries.aggiornaPassword, [username, newPassword], (error) => {
 				if(error) throw error;
-				res.status(200).send('[200] Password modificata con successo.');
+				res.status(200).json({ message: '[200] Password modificata con successo.' });
 			});
 		}
 	},);

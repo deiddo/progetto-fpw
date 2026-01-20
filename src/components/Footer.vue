@@ -7,7 +7,7 @@
 	<footer>
 		
 		<div id="divNomeGruppo">
-			<p>NOSFERATERS</p>
+			<img src="/src/assets/img/logoFooter.png">
 		</div>
 
 		<div id="divComponenti">
@@ -30,19 +30,15 @@
 		background-color: var(--rossoScuro);
 		clear: both;
 		width: 100%;
-		padding: 15px 0;
+		padding: 5px 0;
 
 		color: var(--bianco);
-	}
-
-	#divNomeGruppo, #divComponenti {
-		font-family: sans-serif;
-
 		text-align: center;
+		font-family: sans-serif;
 	}
 
 	#divComponenti ul {
-		margin: 0;
+		margin-top: 20px;
 		padding: 0;
 	}
 
@@ -53,6 +49,11 @@
 
 	/*	Media query per desktop	*/
 	@media only screen and (min-width: 768px) {
+		
+		#divNomeGruppo img {
+			width: 10%;
+		}
+
 		#divComponenti li {
 			display: inline;
 			margin-right: 2%;
@@ -62,6 +63,11 @@
 
 	/*	Media query per smartphone	*/
 	@media only screen and (max-width: 768px) {
+
+		#divNomeGruppo img {
+			width: 45%;
+		}
+
 		#divComponenti li {
 			display: block;
 		}
