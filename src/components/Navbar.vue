@@ -69,6 +69,10 @@
 		text-decoration: underline;
 	}
 
+	.router-link-active {
+		color: var(--oro);
+	}
+
 
 	/*	Media query per desktop	*/
 	@media only screen and (min-width: 768px) {

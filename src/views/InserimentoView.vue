@@ -21,6 +21,7 @@
 
 			async addProdotto() {
 
+				// Controllo su lun
 				if(this.nome.length == 0 || this.descrizione.length == 0) {
 					alert('Il nome del prodotto e/o la sua descrizione non possono essere vuoti.');
 					return;
@@ -37,15 +38,41 @@
 				}
 			},
 
-			checkNumCharNome() {
-				if(this.nome.length > this.maxCharNome) {
-					this.nome = this.nome.substring(0, this.maxCharNome);
-				}
-			},
+			checkInput(input) {
+				switch(input) {
+					case 'nome':
+						if(this.nome.length == 0)
+							return false;
 
-			checkNumCharDesc() {
-				if(this.descrizione.length > this.maxCharDesc) {
-					this.descrizione = this.descrizione.substring(0, this.maxCharDesc);
+						if(this.nome.length > this.maxCharNome) 
+							this.nome = this.nome.substring(0, this.maxCharNome);
+
+						return true;
+
+					case 'descrizione':
+						if(this.descrizione.length == 0)
+							return false;
+
+						if(this.descrizione.length > this.maxCharDesc) 
+							this.descrizione = this.descrizione.substring(0, this.maxCharDesc);	
+
+						return true;
+
+					case 'ritrovamento':
+						if(this.usernameRegistrazione.length > this.maxCharUNPW) 
+							this.usernameRegistrazione = this.usernameRegistrazione.substring(0, this.maxCharUNPW);
+
+						break;
+
+					case 'passwordRegistrazione':
+						if(this.passwordRegistrazione.length > this.maxCharUNPW) 
+							this.passwordRegistrazione = this.passwordRegistrazione.substring(0, this.maxCharUNPW);
+
+						break;
+
+					default:
+						console.log('Errore');
+						break;
 				}
 			}
 		},
