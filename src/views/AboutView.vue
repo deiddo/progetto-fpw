@@ -12,21 +12,21 @@
 					{
 						nome: "Alessandro Deidda",
 						descrizione: "provabb",
-						immagine: "/src/assets/img/oggetti/caravali.jpeg"
+						immagine: "/src/assets/img/oggetti/pirots.jpeg"
 					},
 					{
 						nome: "Riccardo Cau",
-						descrizione: "provabbb",
+						descrizione: "Gabbiano umano che fa le pizze col microfono in mano che canta stonando i clienti cacciando.",
 						immagine: "li.png"
 					},
 					{
 						nome: "Francesco Mameli",
-						descrizione: "provablabla",
+						descrizione: "Giovane ragazzo del Tennessee con una forte passione per le scale a chiocciola e il cioccolato fondente, porta le porte a Porta a Porta.",
 						immagine: "il.png"
 					},
 					{
 						nome: "Gabriele Podda",
-						descrizione: "provabbb",
+						descrizione: "Ragazzo affamato di musica con una forte dedizione allo scacco, affinché esso non sia matto.",
 						immagine: "li.png"
 					},
 				]

@@ -5,27 +5,20 @@
 	export default {
 		data() {
 			return {
-				nome: '',
-				descrizione: '',
+				nome: '',							maxCharNome: 64,
+				descrizione: '',					maxCharDesc: 256,
+				ritrovamento: '',					maxCharRitr: 128,
+				grado_stranezza: 0,					minGradoStran: 1,		maxGradoStran: 5,
 				immagine: '',
 				utente: '',
-				sessionStore: useSessionStore(),
-				prodotti: [],
 
-				maxCharNome: 64,
-				maxCharDesc: 256,
+				sessionStore: useSessionStore(),
 			}
 		},
 
 		methods: {
 
 			async addProdotto() {
-
-				// Controllo su lun
-				if(this.nome.length == 0 || this.descrizione.length == 0) {
-					alert('Il nome del prodotto e/o la sua descrizione non possono essere vuoti.');
-					return;
-				}
 
 				const data = await Api.addProdotto(this.nome, this.descrizione, "placeholder.jpeg", this.sessionStore.getUser());
 				
@@ -41,34 +34,26 @@
 			checkInput(input) {
 				switch(input) {
 					case 'nome':
-						if(this.nome.length == 0)
-							return false;
-
 						if(this.nome.length > this.maxCharNome) 
 							this.nome = this.nome.substring(0, this.maxCharNome);
-
-						return true;
+					break;
 
 					case 'descrizione':
-						if(this.descrizione.length == 0)
-							return false;
-
 						if(this.descrizione.length > this.maxCharDesc) 
 							this.descrizione = this.descrizione.substring(0, this.maxCharDesc);	
-
-						return true;
+					break;
 
 					case 'ritrovamento':
-						if(this.usernameRegistrazione.length > this.maxCharUNPW) 
-							this.usernameRegistrazione = this.usernameRegistrazione.substring(0, this.maxCharUNPW);
+						if(this.ritrovamento.length > this.maxCharRitr) 
+							this.ritrovamento = this.ritrovamento.substring(0, this.maxCharRitr);
 
-						break;
+					break;
 
-					case 'passwordRegistrazione':
-						if(this.passwordRegistrazione.length > this.maxCharUNPW) 
-							this.passwordRegistrazione = this.passwordRegistrazione.substring(0, this.maxCharUNPW);
-
-						break;
+					case 'grado_stranezza':
+						if(this.grado_stranezza < this.minGradoStran && this.grado_stranezza > this.maxGradoStran)
+							return false;
+						
+						return true;
 
 					default:
 						console.log('Errore');
@@ -91,13 +76,24 @@
 			<form action="prodotti" method="POST" id="inserimentoForm">
 
 				<b><label for="nome">Nome</label></b><br>
-				<input type="text" name="nome" id="nome" v-model="nome" @input="checkNumCharNome()">
+				<input type="text" name="nome" id="nome" v-model="nome" @input="checkInput('nome')">
 				<p id="caratteri-nome">Caratteri: {{ nome.length }}/{{ maxCharNome }}</p>
 				<br><br>
 
 				<b><label for="descrizione">Descrizione</label></b><br>
 				<textarea name="descrizione" id="descrizione" v-model="descrizione" @input="checkNumCharDesc()"></textarea>
 				<p id="caratteri-descrizione">Caratteri: {{ descrizione.length }}/{{ maxCharDesc }}</p>
+				<br><br>
+
+				<b><label for="ritrovamento">Ritrovamento</label></b><br>
+				<input type="text" name="ritrovamento" id="ritrovamento" v-model="ritrovamento" @input="checkInput('ritrovamento')">
+				<p id="caratteri-ritrovamento">Caratteri: {{ ritrovamento.length }}/{{ maxCharRitr }}</p>
+				<br><br>
+
+				<b><label for="grado_stranezza">Grado di stranezza</label></b><br>
+				<select v-model="grado_stranezza">
+					<option v-for="value in maxGradoStran" :key="value">{{ value }}</option>
+				</select>
 				<br><br>
 
 				<input type="submit" value="Conferma" class="button" @click.stop.prevent="addProdotto()" />

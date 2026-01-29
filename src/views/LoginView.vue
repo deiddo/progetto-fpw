@@ -1,32 +1,33 @@
 <script>
 
 	import { useSessionStore } from '@/stores/session';
+
 	import * as Auth from '@/utils/auth.js';
 	import * as Api from '@/utils/apis.js';
 
 	export default {
 		data() {
 			return {
-
-				utenti: [],
-
-				usernameLogin: '',					maxCharUNPW: 32,
+				// v-model per ogni input dei form		// Valori minimi e/o massimi per ciascun tipo di input
+				usernameLogin: '',						maxCharUNPW: 32,
 				passwordLogin: '',
 
 				usernameRegistrazione: '',
 				passwordRegistrazione: '',
 				confermaPswRegistrazione: '',
-				nome: '',							maxCharNomeCogn: 64,
+				nome: '',								maxCharNomeCogn: 64,
 				cognome: '',
-				email: '',							maxCharMailCitta: 128,
+				email: '',								maxCharMailCitta: 128,
 				citta: '',
-				eta: 0,								minEta: 12,			maxEta: 99,
+				eta: 0,									minEta: 12,			maxEta: 99,
 				sesso: null,
 
+				// Stile per l'input dell'età da modificare in caso di valore non corretto
 				etaStyle: {
 					color: 'black'
 				},
 
+				// Variabile per la visualizzazione del form di registrazione/login
 				registrazione: false,
 			}
 		},
@@ -40,41 +41,67 @@
 		},
 
 		methods: {
+
+			// Metodo per effettuare il login al sito
 			async login() {
+
+				// Richiesta di login al server con i dati forniti
 				const data = await Auth.login(this.usernameLogin, this.passwordLogin);
 
+				// Se la richiesta va buon fine, ritorna alla home
 				if(data.userID) {
 					useSessionStore().setUser(data.userID);
 					this.$router.push('/');
-				} else {
+				} 
+				
+				// Altrimenti, mostra un messaggio di errore
+				else {
 					const user = await Api.getUtenteByUsername(this.usernameLogin);
 
+					// Se il nome utente inserito non è registrato
 					if(!user[0]) {
 						alert('Utente non registrato.');
-					} else {
+					} 
+					
+					// Se il nome utente è già registrato
+					else {
 						alert('Password errata.');
 					}
 				}
 			},
 
+			// Metodo per effettuare la registrazione al sito
 			async addUtente() {
 
+				// Controllo se le due password inserite sono uguali
 				if(this.passwordRegistrazione != this.confermaPswRegistrazione) {
 					alert('Le due password non corrispondono.');
 					return;
 				}
 
-				const data = await Api.addUtente(this.usernameRegistrazione, this.passwordRegistrazione, this.nome, this.cognome, this.email, this.citta, this.eta, this.sesso);
+				// Controllo se il nome utente scelto è disponibile
+				const user = await Api.getUtenteByUsername(this.usernameRegistrazione)
+
+				// Se sì, richiedi registrazione al server
+				if(!user[0]) {
+					const data = await Api.addUtente(this.usernameRegistrazione, this.passwordRegistrazione, this.nome, this.cognome, this.email, this.citta, this.eta, this.sesso);
 				
-				if(data) {
-					alert('Account creato correttamente.');
-					this.$router.push('/');
-				} else {
-					console.log(data);
-					alert('Errore');
+					if(data) {
+						alert('Account creato correttamente.');
+						this.$router.push('/');
+					} else {
+						console.log(data);
+						alert('Errore');
+					}	
+				}
+
+				// Altrimenti, mostra un messaggio di errore
+				else {
+					alert('Nome utente non disponibile.');
 				}
 			},
 
+			// Metodo per scambiare tra il form di registrazione o quello di login cliccando sul pulsante apposito
 			toggleRegistrazione() {
 				if(this.registrazione) {
 					this.registrazione = false;
@@ -85,6 +112,7 @@
 				}
 			},
 
+			// Metodo per il controllo della validità degli input (lunghezza massima per testo, valori soglia per numeri)
 			checkInput(input) {
 				switch(input) {
 					case 'usernameLogin':
@@ -179,14 +207,16 @@
 				<p class="toggle" @click.stop.prevent="toggleRegistrazione()"><i>Non hai un account? <b>Creane uno</b></i></p><br>
 
 				<b><label for="username">Nome utente</label></b><br>
-				<input type="text" name="usernameLogin" id="usernameLogin" v-model="usernameLogin">
+				<input type="text" name="usernameLogin" id="usernameLogin" v-model="usernameLogin" @input="checkInput('usernameLogin')">
+				<p id="caratteri-usernameLogin">Caratteri: {{ usernameLogin.length }}/{{ maxCharUNPW }}</p>
 				<br><br>
 
 				<b><label for="password">Password</label></b><br>
-				<input type="password" name="passwordLogin" id="passwordLogin" v-model="passwordLogin">
+				<input type="password" name="passwordLogin" id="passwordLogin" v-model="passwordLogin" @input="checkInput('passwordLogin')">
+				<p id="caratteri-passwordLogin">Caratteri: {{ passwordLogin.length }}/{{ maxCharUNPW }}</p>
 				<br><br>
 
-				<input type="submit" value="Accedi" class="button" @click.stop.prevent="login()" />
+				<input type="submit" value="Conferma" class="button" @click.stop.prevent="login()" />
 			</form>
 		</div>
 
@@ -233,7 +263,6 @@
 						<b><label for="eta">Età</label></b><br>
 						<input type="number" :style="etaStyle" name="eta" id="eta" :min="minEta" :max="maxEta" v-model="eta">
 						<p v-if="!checkInput('eta')">Età consentite: {{ minEta }} - {{ maxEta }}</p>
-						<br>
 
 						<p><b>Sesso</b></p>
 						<label for="uomo">Uomo</label>
@@ -243,7 +272,7 @@
 						<input type="radio" name="sesso" id="donna" value="2" v-model="sesso">
 						<br><br>
 
-						<input type="submit" value="Registrati" class="button" :disabled="!checkInput('eta') || !checkInput('sesso')" @click.stop.prevent="addUtente()" />
+						<input type="submit" value="Conferma" class="button" :disabled="!checkInput('eta') || !checkInput('sesso')" @click.stop.prevent="addUtente()" />
 					</div>		
 				</div>
 
@@ -281,7 +310,7 @@
 		left: 50%;
 		transform: translate(-50%, -50%);
 
-		padding: 10px 70px;
+		padding: 10px 60px;
 		margin: 0;
 	}
 	
@@ -293,17 +322,20 @@
 	/* Media query per desktop */
 	@media only screen and (min-width: 768px) {
 
-		#loginContent {
+		#loginContent, #registrazioneContent {
 			height: 650px;
 		}
 
 		#loginForm, #registrazioneForm {
-			top: 50%;
 			width: 40%;
 		}
 
-		#registrazioneContent {
-			height: 850px;
+		#loginForm {
+			top: 60%;
+		}
+
+		#registrazioneForm {
+			top: 60%;
 		}
 
 		.input-reg {
@@ -320,7 +352,7 @@
 		}
 
 		input[type="text"], input[type="password"], input[type="email"], input[type="number"] {
-			width: 60%;
+			width: 80%;
 		}
 	}
 
@@ -333,7 +365,7 @@
 		}
 
 		#loginForm {
-			top: 40%;
+			top: 50%;
 		}
 
 		#registrazioneContent {
@@ -342,6 +374,10 @@
 
 		#registrazioneForm {
 			top: 50%;
+		}
+
+		input[type="text"], input[type="password"], input[type="email"], input[type="number"] {
+			width: 100%;
 		}
 	}
 

@@ -43,7 +43,7 @@
 
 		<Card v-if="numProdotti == 0" :nome="messaggioDefault"/>
 
-		<Card v-for="prodotto in prodotti" :key="prodotto.id" :immagine="prodotto.immagine" :nome="prodotto.nome" :descrizione="prodotto.descrizione" :utente="prodotto.utente"/>
+		<Card v-for="prodotto in prodotti" :key="prodotto.id" :immagine="prodotto.immagine" :nome="prodotto.nome" :descrizione="prodotto.descrizione" :ritrovamento="prodotto.ritrovamento" :grado_stranezza="prodotto.grado_stranezza" :utente="prodotto.utente"/>
 		
 
 	</article>

@@ -22,21 +22,22 @@
 
 				mostraNewPassword: false,
 
-				vecchiaPassword: '',
+				vecchiaPassword: '',			maxCharPSWD: 32,
 				nuovaPassword: '',
 				confermaPassword: '',
 			}
 		},
 
 		methods: {
+
+			getUser() {
+				this.username = this.sessionStore.getUser();
+			},
+
 			async logout () {
 				await Auth.logout();
 				this.sessionStore.setUser(null);
 				this.$router.push('/');
-			},
-
-			getUser() {
-				this.username = this.sessionStore.getUser();
 			},
 
 			async getDatiUtente() {
@@ -51,10 +52,6 @@
 					this.saluto = 'Benvenuta';
 				}
 			},
-			
-			toggleNewPassword() {
-				this.mostraNewPassword = true;
-			},
 
 			async aggiornaPassword() {
 				
@@ -68,6 +65,11 @@
 					return;
 				}
 
+				if(this.password == this.nuovaPassword) {
+					alert('La nuova password non può essere uguale alla vecchia.');
+					return;
+				}
+
 				const data = await Api.aggiornaPassword(this.username, this.nuovaPassword);
 
 				if(data) {
@@ -78,6 +80,35 @@
 					alert('Errore');
 				}
 			},
+			
+			toggleNewPassword() {
+				this.mostraNewPassword = true;
+			},
+
+			checkInput(input) {
+
+				switch(input) {
+					case 'vecchiaPassword':
+						if(this.vecchiaPassword.length > this.maxCharPSWD)
+							this.vecchiaPassword = this.vecchiaPassword.substring(0, this.maxCharPSWD);
+					break;
+
+					case 'nuovaPassword':
+						if(this.nuovaPassword.length > this.maxCharPSWD)
+							this.nuovaPassword = this.nuovaPassword.substring(0, this.maxCharPSWD);
+					break;
+
+					case 'confermaPassword':
+						if(this.confermaPassword.length > this.maxCharPSWD)
+							this.confermaPassword = this.confermaPassword.substring(0, this.maxCharPSWD);
+					break;
+
+					default:
+						console.log('Errore');
+					break;
+				}
+
+			}
 		},
 
 		mounted() {
@@ -105,13 +136,17 @@
 
 		<form v-show="mostraNewPassword" id="formCambioPassword" action="utenti">
 			<label for="vecchia-password">Vecchia password</label><br>
-			<input type="password" name="vecchia-password" id="vecchia-password" v-model="vecchiaPassword"><br><br>
+			<input type="password" name="vecchia-password" id="vecchia-password" v-model="vecchiaPassword" @input="checkInput('vecchiaPassword')">
+			<p id="caratteri-vecchiaPassword">Caratteri: {{ vecchiaPassword.length }}/{{ maxCharPSWD }}</p><br>
 
 			<label for="nuova-password">Nuova password</label><br>
-			<input type="password" name="nuova-password" id="nuova-password" v-model="nuovaPassword"><br><br>
+			<input type="password" name="nuova-password" id="nuova-password" v-model="nuovaPassword" @input="checkInput('nuovaPassword')">
+			<p id="caratteri-nuovaPassword">Caratteri: {{ nuovaPassword.length }}/{{ maxCharPSWD }}</p><br>
+
 
 			<label for="conferma-password">Conferma password</label><br>
-			<input type="password" name="conferma-password" id="conferma-password" v-model="confermaPassword"><br><br>
+			<input type="password" name="conferma-password" id="conferma-password" v-model="confermaPassword" @input="checkInput('confermaPassword')">
+			<p id="caratteri-confermaPassword">Caratteri: {{ confermaPassword.length }}/{{ maxCharPSWD }}</p><br>
 
 			<input type="submit" class="button" value="Conferma" @click.stop.prevent="aggiornaPassword()">
 

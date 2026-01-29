@@ -17,6 +17,16 @@
 				required: false
 			},
 
+			ritrovamento: {
+				type: String,
+				required: false
+			},
+
+			grado_stranezza: {
+				type: Number,
+				required: false
+			},
+
 			utente: {
 				type: String,
 				required: false
@@ -39,6 +49,13 @@
 
 			<div v-show="descrizione != null" class="descrizione">
 				<p>{{ descrizione }}</p>
+
+				<p v-show="ritrovamento != null"><b>Ritrovamento:</b> {{ ritrovamento }}</p>
+
+				<p v-show="grado_stranezza != null"><b>Grado di stranezza:</b></p>
+				<img src="/src/assets/img/star.png" alt="" v-for="value in grado_stranezza">
+				
+
 				<p v-show="utente != null"><i>Aggiunto da {{ utente }}</i></p>
 			</div>
 		</div>

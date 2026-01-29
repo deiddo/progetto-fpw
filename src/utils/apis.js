@@ -14,8 +14,10 @@ const getListaProdotti = async () => {
 
 const addProdotto = async (nome, descrizione, immagine, utente) => {
 
+	// Aggiunta del percorso assoluto in cui si trovano le immagini al nome del file
 	immagine = "/src/assets/img/oggetti/" + immagine;
 
+	// Invio richiesta di aggiunta oggetto al server
     const response = await fetch('api/prodotti/', {
         method: 'POST',
         headers: {

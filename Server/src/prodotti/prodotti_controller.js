@@ -26,8 +26,8 @@ const addProdotto = (req, res) => {
 		return;
 	}
 
-	const { nome, descrizione, immagine, utente } = req.body;
-	pool.query(queries.addProdotto, [ nome, descrizione, immagine, utente ], (error) => {
+	const { nome, descrizione, ritrovamento, grado_stranezza, immagine, utente } = req.body;
+	pool.query(queries.addProdotto, [ nome, descrizione, ritrovamento, grado_stranezza, immagine, utente ], (error) => {
 		if(error) throw error;
 		res.status(201).json({ message: '[201] Prodotto aggiunto con successo.' });
 	});
@@ -59,7 +59,7 @@ const updateProdotto = (req, res) => {
 	}
 
 	const id = parseInt(req.params.id);
-	const { nome, descrizione, immagine } = req.body;
+	const { nome, descrizione, ritrovamento, grado_stranezza, immagine } = req.body;
 
 	pool.query(queries.getProdottoById, [id], (error, results) => {
 		if(error) throw error;
@@ -69,7 +69,7 @@ const updateProdotto = (req, res) => {
 		}
 
 		else {
-			pool.query(queries.updateProdotto, [id, nome, descrizione, immagine], (error) => {
+			pool.query(queries.updateProdotto, [id, nome, descrizione, ritrovamento, grado_stranezza, immagine], (error) => {
 				if(error) throw error;
 				res.status(200).json({ message: '[200] Prodotto aggiornato con successo.' });
 			});

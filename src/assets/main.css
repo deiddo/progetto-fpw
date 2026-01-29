@@ -14,12 +14,8 @@ a:link {
 	text-decoration: none;
 }
 
-p, h1, label, a {
+p, h1, h2, label, a {
 	color: white;
-}
-
-.title {
-	
 }
 
 
@@ -54,10 +50,6 @@ p, h1, label, a {
 .col-10 { width: 83.33%; }
 .col-11 { width: 91.66%; }
 .col-12 { width: 100%; }
-
-input, textarea {
-		color: black;
-	}
 
 
 /* Layout a colonne per desktop */
