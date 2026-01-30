@@ -1,6 +1,7 @@
-const { errorMessages } = require('vue/compiler-sfc');
+
 const pool = require('../../db');
 const queries = require('./utenti_queries');
+
 
 const getListaUtenti = (req, res) => {
 	pool.query(queries.getListaUtenti, (error, results) => {

@@ -116,28 +116,45 @@
 			checkInput(input) {
 				switch(input) {
 					case 'usernameLogin':
+						if(this.usernameLogin.length == 0)
+							return false;
+
 						if(this.usernameLogin.length > this.maxCharUNPW) 
 							this.usernameLogin = this.usernameLogin.substring(0, this.maxCharUNPW);
 						
-						break;
+						return true;
 
 					case 'passwordLogin':
+						if(this.passwordLogin.length == 0)
+							return false;
+
 						if(this.passwordLogin.length > this.maxCharUNPW) 
 							this.passwordLogin = this.passwordLogin.substring(0, this.maxCharUNPW);	
 
-						break;
+						return true;
+
+					case 'allLogin':
+						return this.checkInput('usernameLogin') && this.checkInput('passwordLogin');
+
+
 
 					case 'usernameRegistrazione':
+						if(this.usernameRegistrazione.length == 0)
+							return false;
+					
 						if(this.usernameRegistrazione.length > this.maxCharUNPW) 
 							this.usernameRegistrazione = this.usernameRegistrazione.substring(0, this.maxCharUNPW);
 
-						break;
+						return true;
 
 					case 'passwordRegistrazione':
+						if(this.passwordRegistrazione.length == 0)
+							return false;
+
 						if(this.passwordRegistrazione.length > this.maxCharUNPW) 
 							this.passwordRegistrazione = this.passwordRegistrazione.substring(0, this.maxCharUNPW);
 
-						break;
+						return true;
 
 					case 'confermaPswRegistrazione':
 						if(this.confermaPswRegistrazione.length > this.maxCharUNPW) 
@@ -146,30 +163,43 @@
 						break;
 
 					case 'nome':
+						if(this.nome.length == 0)
+							return false;
+
 						if(this.nome.length > this.maxCharNomeCogn) 
 							this.nome = this.nome.substring(0, this.maxCharNomeCogn);
 
-						break;
+						return true;
 
 					case 'cognome':
+						if(this.cognome.length == 0)
+							return false;
+
 						if(this.cognome.length > this.maxCharNomeCogn) 
 							this.cognome = this.cognome.substring(0, this.maxCharNomeCogn);
 
-						break;
+						return true;
 
 					case 'email':
+						if(this.email.length == 0)
+							return false;
+
 						if(this.email.length > this.maxCharMailCitta) 
 							this.email = this.email.substring(0, this.maxCharMailCitta);
 
-						break;
+						return true;
 
 					case 'citta':
+						if(this.citta.length == 0)
+							return false;
+
 						if(this.citta.length > this.maxCharMailCitta) 
 							this.citta = this.citta.substring(0, this.maxCharMailCitta);
 
-						break;
+						return true;
 
 					case 'eta':
+
 						if(this.eta >= this.minEta && this.eta <= this.maxEta) {
 							this.etaStyle.color = 'black';
 							return true;
@@ -184,6 +214,9 @@
 
 						return false;
 
+					case 'allRegistrazione':
+						return this.checkInput('usernameRegistrazione') && this.checkInput('passwordRegistrazione') && this.checkInput('nome') && this.checkInput('cognome') && this.checkInput('email') && this.checkInput('citta') && this.checkInput('eta') && this.checkInput('sesso');
+
 					default:
 						console.log('Errore');
 						break;
@@ -197,7 +230,7 @@
 
 <template>
 
-	<article class="col-12">
+	<article class="col-6">
 
 		<div v-show="!registrazione" id="loginContent">
 
@@ -216,7 +249,7 @@
 				<p id="caratteri-passwordLogin">Caratteri: {{ passwordLogin.length }}/{{ maxCharUNPW }}</p>
 				<br><br>
 
-				<input type="submit" value="Conferma" class="button" @click.stop.prevent="login()" />
+				<input type="submit" value="Conferma" class="button" :disabled="!checkInput('allLogin')" @click.stop.prevent="login()" />
 			</form>
 		</div>
 
@@ -272,18 +305,15 @@
 						<input type="radio" name="sesso" id="donna" value="2" v-model="sesso">
 						<br><br>
 
-						<input type="submit" value="Conferma" class="button" :disabled="!checkInput('eta') || !checkInput('sesso')" @click.stop.prevent="addUtente()" />
+						<input type="submit" value="Conferma" class="button" :disabled="!checkInput('allRegistrazione')" @click.stop.prevent="addUtente()" />
 					</div>		
 				</div>
 
-				<div class="clear"></div>
+				<div class="clear" />
 			</form>
 		</div>
 
-
-
 	</article>
-
 </template>
 
 
@@ -327,19 +357,8 @@
 		}
 
 		#loginForm, #registrazioneForm {
-			width: 40%;
-		}
-
-		#loginForm {
-			top: 60%;
-		}
-
-		#registrazioneForm {
-			top: 60%;
-		}
-
-		.input-reg {
-			width: 100%;
+			width: 70%;
+			top: 40%;
 		}
 
 		.col-reg {

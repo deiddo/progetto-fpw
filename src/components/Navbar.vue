@@ -15,6 +15,9 @@
 		},
 
 		methods: {
+
+			// Metodo per verificare se è attualmente presente una sessione attiva
+			// e mostrare quindi le pagine altrimenti nascoste
 			checkUser() {
 				if(this.sessionStore.getUser() == null) {
 					return false;
@@ -47,7 +50,7 @@
 <style scoped>
 
 	nav {
-		background-color: var(--rossoScuro);
+		background: radial-gradient(circle, var(--rossoScuro) 35%, var(--rossoScuroSec));
 		text-align: center;
 
 		padding: 15px 0;

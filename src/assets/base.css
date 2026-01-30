@@ -1,21 +1,26 @@
+/*
+	Palette di colori utilizzati
+*/
 :root {
 	--neroSfondo: #141414;
+	--neroSfondoSec: #444444;
 	--rossoScuro: #5c1514;
+	--rossoScuroSec: #af1d1a;
+	--rossoScuroTer: #8b120f;
 	--oro: #b09571;
 	--bianco: #fffbf7;
 }
 
-@font-face {
-	font-family: 'MetalMania';
-	src: url('./fonts/MetalMania-Regular.ttf');
-}
 
+/*
+	Importazione dei font
+*/
 @font-face {
-	font-family: 'ChuckNoon';
+	font-family: 'ChuckNoon';					/*	Navbar e Footer		*/
 	src: url('./fonts/Chuck-Noon.ttf');
 }
 
 @font-face {
 	font-family: 'Skorzhen-NCV';
-	src: url('./fonts/Skorzhen-NCV.ttf');
+	src: url('./fonts/Skorzhen-NCV.ttf');		/*	Header		*/
 }

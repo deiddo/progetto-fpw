@@ -12,24 +12,30 @@
 					{
 						nome: "Alessandro Deidda",
 						descrizione: "provabb",
-						immagine: "/src/assets/img/oggetti/pirots.jpeg"
+						immagine: "user.png"
 					},
 					{
 						nome: "Riccardo Cau",
 						descrizione: "Gabbiano umano che fa le pizze col microfono in mano che canta stonando i clienti cacciando.",
-						immagine: "li.png"
+						immagine: "cau.png"
 					},
 					{
 						nome: "Francesco Mameli",
 						descrizione: "Giovane ragazzo del Tennessee con una forte passione per le scale a chiocciola e il cioccolato fondente, porta le porte a Porta a Porta.",
-						immagine: "il.png"
+						immagine: "kekko.png"
 					},
 					{
 						nome: "Gabriele Podda",
 						descrizione: "Ragazzo affamato di musica con una forte dedizione allo scacco, affinché esso non sia matto.",
-						immagine: "li.png"
+						immagine: "podda.png"
 					},
 				]
+			}
+		},
+
+		methods: {
+			getUrlImage(immagine) {
+				return new URL(`../assets/img/about/${immagine}`, import.meta.url);
 			}
 		}
 	}
@@ -38,20 +44,11 @@
 
 <template>
 
-	<aside class="col-3" id="a">
-		<p>a</p>
-	</aside>
-
 
 	<article class="col-6">
-		<Card v-for="studente in gruppoFPW" :immagine="studente.immagine" :nome="studente.nome" :descrizione="studente.descrizione"/>
+		<Card v-for="studente in gruppoFPW" :immagine="getUrlImage(studente.immagine)" :nome="studente.nome" :descrizione="studente.descrizione"/>
 	
 	</article>
-
-
-	<aside class="col-3" id="c">
-		<p>c</p>
-	</aside>
 
 </template>
 

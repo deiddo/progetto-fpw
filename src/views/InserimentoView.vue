@@ -8,7 +8,7 @@
 				nome: '',							maxCharNome: 64,
 				descrizione: '',					maxCharDesc: 256,
 				ritrovamento: '',					maxCharRitr: 128,
-				grado_stranezza: 0,					minGradoStran: 1,		maxGradoStran: 5,
+				grado_stranezza: 1,					minGradoStran: 1,		maxGradoStran: 5,
 				immagine: '',
 				utente: '',
 
@@ -20,7 +20,7 @@
 
 			async addProdotto() {
 
-				const data = await Api.addProdotto(this.nome, this.descrizione, "placeholder.jpeg", this.sessionStore.getUser());
+				const data = await Api.addProdotto(this.nome, this.descrizione, this.ritrovamento, this.grado_stranezza, "placeholder.jpeg", this.sessionStore.getUser());
 				
 				if(data) {
 					alert('Prodotto aggiunto correttamente.');
@@ -34,26 +34,40 @@
 			checkInput(input) {
 				switch(input) {
 					case 'nome':
+						if(this.nome.length == 0)
+							return false;
+
 						if(this.nome.length > this.maxCharNome) 
 							this.nome = this.nome.substring(0, this.maxCharNome);
-					break;
+						
+						return true;
 
 					case 'descrizione':
+						if(this.descrizione.length == 0)
+							return false;
+
 						if(this.descrizione.length > this.maxCharDesc) 
 							this.descrizione = this.descrizione.substring(0, this.maxCharDesc);	
-					break;
+					
+						return true;
 
 					case 'ritrovamento':
+						if(this.ritrovamento.length == 0)
+							return false;
+
 						if(this.ritrovamento.length > this.maxCharRitr) 
 							this.ritrovamento = this.ritrovamento.substring(0, this.maxCharRitr);
 
-					break;
+						return true;
 
 					case 'grado_stranezza':
 						if(this.grado_stranezza < this.minGradoStran && this.grado_stranezza > this.maxGradoStran)
 							return false;
 						
 						return true;
+
+					case 'all':
+						return this.checkInput('nome') && this.checkInput('descrizione') && this.checkInput('ritrovamento') && this.checkInput('grado_stranezza');
 
 					default:
 						console.log('Errore');
@@ -68,7 +82,7 @@
 
 <template>
 	
-	<article class="col-12">
+	<article class="col-6">
 
 		<div id="inserimentoContent">
 			<h1>Aggiungi un nuovo oggetto al catalogo</h1>
@@ -81,7 +95,7 @@
 				<br><br>
 
 				<b><label for="descrizione">Descrizione</label></b><br>
-				<textarea name="descrizione" id="descrizione" v-model="descrizione" @input="checkNumCharDesc()"></textarea>
+				<textarea name="descrizione" id="descrizione" v-model="descrizione" @input="checkInput('descrizione')"></textarea>
 				<p id="caratteri-descrizione">Caratteri: {{ descrizione.length }}/{{ maxCharDesc }}</p>
 				<br><br>
 
@@ -96,7 +110,7 @@
 				</select>
 				<br><br>
 
-				<input type="submit" value="Conferma" class="button" @click.stop.prevent="addProdotto()" />
+				<input type="submit" value="Conferma" class="button" :disabled="!checkInput('all')" @click.stop.prevent="addProdotto()" />
 			</form>
 		</div>
 		
@@ -129,18 +143,22 @@
 		margin: 0;
 	}
 
+	input[type="text"], textarea, select {
+		width: 80%;
+		padding: 5px;
+	}
+
 
 	/* Media query per desktop*/
 	@media only screen and (min-width: 768px) {
 
 		#inserimentoContent {
-			height: 600px;
+			height: 700px;
 		}
 
 		#inserimentoForm {
-			top: 50%;
-
-			width: 30%;
+			top: 45%;
+			width: 60%;
 		}
 
 	}
@@ -150,16 +168,11 @@
 	@media only screen and (max-width: 768px) {
 
 		#inserimentoContent {
-			height: 500px;
+			height: 650px;
 		}
 
 		#inserimentoForm {
 			top: 40%;
-		}
-
-		input[type="text"], textarea {
-			width: 80%;
-			padding: 5px;
 		}
 	}
 

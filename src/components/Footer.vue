@@ -1,7 +1,3 @@
-<script>
-
-</script>
-
 <template>
 
 	<footer>
@@ -16,7 +12,7 @@
 				<li>Deidda Alessandro</li>
 				<li>Mameli Francesco</li>
 				<li>Podda Gabriele</li>
-				<li>email@a.a</li>
+				<li>f.mameli62@studenti.unica.it</li>
 			</ul>
 		</div>
 
@@ -27,14 +23,13 @@
 <style scoped>
 
 	footer {
-		background-color: var(--rossoScuro);
+		background: radial-gradient(circle, var(--rossoScuro) 35%, var(--rossoScuroSec));
 		clear: both;
-		width: 100%;
 		padding: 5px 0;
 
 		color: var(--bianco);
 		text-align: center;
-		font-family: sans-serif;
+		font-family: 'ChuckNoon';
 	}
 
 	#divComponenti ul {

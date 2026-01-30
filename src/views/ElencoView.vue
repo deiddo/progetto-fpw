@@ -1,5 +1,5 @@
 <script>
-	import * as Api from '@/utils/apis.js'
+	import * as Api from '@/utils/apis.js';
 	import { useSessionStore } from '@/stores/session';
 
 	import Card from '@/components/Card.vue';
@@ -23,6 +23,10 @@
 				const data = await Api.getListaProdotti();
 				this.prodotti = data;
 				this.numProdotti = data.length;
+			},
+
+			getUrlImage(immagine) {
+				return new URL(`../assets/img/oggetti/${immagine}`, import.meta.url);
 			}
 		},
 
@@ -34,23 +38,15 @@
 
 
 <template>
-	
-	<aside class="col-3" id="a">
-		a
-	</aside>
 
 	<article class="col-6">
 
 		<Card v-if="numProdotti == 0" :nome="messaggioDefault"/>
 
-		<Card v-for="prodotto in prodotti" :key="prodotto.id" :immagine="prodotto.immagine" :nome="prodotto.nome" :descrizione="prodotto.descrizione" :ritrovamento="prodotto.ritrovamento" :grado_stranezza="prodotto.grado_stranezza" :utente="prodotto.utente"/>
+		<Card v-for="prodotto in prodotti" :key="prodotto.id" :immagine="getUrlImage(prodotto.immagine)" :nome="prodotto.nome" :descrizione="prodotto.descrizione" :ritrovamento="prodotto.ritrovamento" :grado_stranezza="prodotto.grado_stranezza" :utente="prodotto.utente"/>
 		
 
 	</article>
-
-	<aside class="col-3" id="c">
-		c
-	</aside>
 
 </template>
 

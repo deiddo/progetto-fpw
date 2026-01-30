@@ -89,19 +89,31 @@
 
 				switch(input) {
 					case 'vecchiaPassword':
+						if(this.vecchiaPassword.length == 0)
+							return false;
+
 						if(this.vecchiaPassword.length > this.maxCharPSWD)
 							this.vecchiaPassword = this.vecchiaPassword.substring(0, this.maxCharPSWD);
-					break;
+
+						return true;
 
 					case 'nuovaPassword':
+						if(this.nuovaPassword.length == 0)
+							return false;
+
 						if(this.nuovaPassword.length > this.maxCharPSWD)
 							this.nuovaPassword = this.nuovaPassword.substring(0, this.maxCharPSWD);
-					break;
+						
+						return true;
 
 					case 'confermaPassword':
+						if(this.confermaPassword.length == 0)
+							return false;
+
 						if(this.confermaPassword.length > this.maxCharPSWD)
 							this.confermaPassword = this.confermaPassword.substring(0, this.maxCharPSWD);
-					break;
+						
+						return true;
 
 					default:
 						console.log('Errore');
@@ -121,8 +133,6 @@
 
 <template>
 	
-	<aside class="col-3" id="a">a</aside>
-
 	<article class="col-6">
 		<h1>Il tuo profilo</h1>
 		<p>{{ saluto }} {{  nome  }} {{ cognome }}</p>
@@ -148,15 +158,13 @@
 			<input type="password" name="conferma-password" id="conferma-password" v-model="confermaPassword" @input="checkInput('confermaPassword')">
 			<p id="caratteri-confermaPassword">Caratteri: {{ confermaPassword.length }}/{{ maxCharPSWD }}</p><br>
 
-			<input type="submit" class="button" value="Conferma" @click.stop.prevent="aggiornaPassword()">
+			<input type="submit" class="button" value="Conferma" :disabled="!checkInput('vecchiaPassword') || !checkInput('nuovaPassword')" @click.stop.prevent="aggiornaPassword()">
 
 		</form>
 
 
 		<button class="button" @click.stop.prevent="logout()">Disconnetti</button>
 	</article>
-
-	<aside class="col-3" id="c">c</aside>
 
 	
 </template>

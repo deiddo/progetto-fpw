@@ -1,3 +1,5 @@
+// API per le richieste di login/logout, e di controllo sessione attiva
+
 const login = async (username, password) => {
 	const response = await fetch('api/sessions/login', {
 		method: 'POST',

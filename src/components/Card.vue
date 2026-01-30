@@ -1,9 +1,12 @@
 <script>
 
 	export default {
+
+		// Props per i campi del componente
+
 		props: {
 			immagine: {
-				type: String,
+				type: URL,
 				required: false
 			},
 
@@ -31,7 +34,7 @@
 				type: String,
 				required: false
 			}
-		},
+		}
 	}
 
 </script>
@@ -40,7 +43,9 @@
 
 	<div class="card">
 
-		<img v-show="immagine != null" :src="immagine"  class="immagine">
+		<div class="div-immagine">
+			<img v-show="immagine != null" :src="immagine">
+		</div>
 
 		<div class="informazioni">
 			<div class="nome">
@@ -69,11 +74,10 @@
 <style scoped>
 
 	.card {
-		margin: 10px 0;
 		padding: 2% 5%;
 		border-radius: 15px;
 
-		background-color: var(--rossoScuro);
+		background-color: var(--rossoScuroTer);
 		color: var(--bianco);
 		font-family: sans-serif;
 	}
@@ -91,13 +95,26 @@
 	/* Media query per desktop */
 	@media only screen and (min-width: 768px) {
 
-		.immagine {
+		.card {
+			margin: 10px 0;
+		}
+
+		.div-immagine, .informazioni {
+			display: inline;
 			float: left;
+		}
+
+		.div-immagine {
+			width: 30%;
 			margin-right: 5%;
 		}
 
+		.div-immagine > img {
+			width: 100%;
+		}
+
 		.informazioni {
-			height: 100%;
+			width: 65%;
 		}
 
 		.clear {
@@ -108,11 +125,17 @@
 
 	/* Media query per smartphone */
 	@media only screen and (max-width: 768px) {
-		.immagine {
-			width: 100%;
-			margin: 10% 0;
-			
+
+		.card {
+			margin: 5%;
+		}
+
+		.div-immagine {
 			text-align: center;
+		}
+
+		.div-immagine > img {
+			width: 90%;
 		}
 
 		.informazioni {

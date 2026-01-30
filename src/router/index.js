@@ -1,14 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import * as Auth from '@/utils/auth.js';
 
+
+// Importazione componenti per ciascuna View del sito
 import HomeView from '@/views/HomeView.vue'
 import ElencoView from '@/views/ElencoView.vue'
 import InserimentoView from '@/views/InserimentoView.vue'
 import AboutView from '@/views/AboutView.vue'
 import LoginView from '@/views/LoginView.vue'
 import ProfileView from '@/views/ProfileView.vue'
+
 import { useSessionStore } from '@/stores/session'
 
+// Creazione del router con tutte le route
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -21,7 +25,7 @@ const router = createRouter({
 			path: '/elenco',
 			name: 'elenco',
 			component: ElencoView,
-			meta: { requiresAuth: true },
+			meta: { requiresAuth: true },			// La pagina è accessibile solo dopo l'autenticazione
 		}, 
 		{
 			path: '/inserimento',
@@ -48,7 +52,8 @@ const router = createRouter({
   ],
 })
 
-
+// Funzione per rimandare l'utente alla pagina di login se entrasse da non autenticato
+// in una delle pagine che lo necessitano
 router.beforeEach(async (to, from, next) => {
 	const sessionStore = useSessionStore();
 
