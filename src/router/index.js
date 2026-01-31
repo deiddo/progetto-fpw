@@ -66,6 +66,8 @@ router.beforeEach(async (to, from, next) => {
 				path: '/login',
 				query: { redirect: to.fullPath }
 			})
+
+			alert('Effettua prima l\'accesso.');
 		} else {
 			next()
 		}

@@ -45,12 +45,6 @@
 
 		<Card v-for="prodotto in prodotti" :key="prodotto.id" :immagine="getUrlImage(prodotto.immagine)" :nome="prodotto.nome" :descrizione="prodotto.descrizione" :prezzo="prodotto.prezzo" :ritrovamento="prodotto.ritrovamento" :grado_stranezza="prodotto.grado_stranezza" :utente="prodotto.utente"/>
 		
-
 	</article>
 
 </template>
-
-
-<style scoped>
-
-</style>

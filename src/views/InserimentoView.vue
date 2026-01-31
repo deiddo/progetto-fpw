@@ -34,7 +34,7 @@
 
 			async addProdotto() {
 
-				const data = await Api.addProdotto(this.nome, this.descrizione, this.ritrovamento, this.grado_stranezza, "placeholder.jpeg", this.sessionStore.getUser());
+				const data = await Api.addProdotto(this.nome, this.descrizione, this.prezzo, this.ritrovamento, this.grado_stranezza, "placeholder.jpeg", this.sessionStore.getUser());
 				
 				if(data) {
 					alert('Prodotto aggiunto correttamente.');
@@ -191,7 +191,7 @@
 	}
 
 
-	/* Media query per desktop*/
+	/* Media query per desktop */
 	@media only screen and (min-width: 768px) {
 
 		#inserimentoContent {
@@ -215,7 +215,7 @@
 	}
 
 
-	/* Media query per smartphone*/
+	/* Media query per smartphone */
 	@media only screen and (max-width: 768px) {
 
 		#inserimentoContent {
@@ -223,7 +223,7 @@
 		}
 
 		#inserimentoForm {
-			top: 40%;
+			top: 50%;
 		}
 	}
 

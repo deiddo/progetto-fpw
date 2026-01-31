@@ -16,11 +16,11 @@
 	Importazione dei font
 */
 @font-face {
-	font-family: 'ChuckNoon';					/*	Navbar e Footer		*/
+	font-family: 'ChuckNoon';
 	src: url('./fonts/Chuck-Noon.ttf');
 }
 
 @font-face {
 	font-family: 'Skorzhen-NCV';
-	src: url('./fonts/Skorzhen-NCV.ttf');		/*	Header		*/
+	src: url('./fonts/Skorzhen-NCV.ttf');
 }

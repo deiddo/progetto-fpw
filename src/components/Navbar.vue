@@ -62,10 +62,15 @@
 		padding: 0;
 	}
 
-	nav li{		
+	nav li {
+		color: white;
 		font-family: 'ChuckNoon';
 
 		list-style-type: none;
+	}
+
+	nav li > a {
+		color: white;
 	}
 
 	nav li:hover {

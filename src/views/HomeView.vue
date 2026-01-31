@@ -1,8 +1,3 @@
-<script>
-
-</script>
-
-
 <template>
 
 	<article class="col-6">

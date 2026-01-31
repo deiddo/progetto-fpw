@@ -19,7 +19,7 @@
 				cognome: '',
 				email: '',								maxCharMailCitta: 128,
 				citta: '',
-				eta: 0,									minEta: 12,			maxEta: 99,
+				eta: 18,								minEta: 18,			maxEta: 99,
 				sesso: null,
 
 				// Stile per l'input dell'età da modificare in caso di valore non corretto
@@ -294,8 +294,8 @@
 						<br><br>
 
 						<b><label for="eta">Età</label></b><br>
+						<span v-if="!checkInput('eta')" class="errInput">(Min: {{ minEta }} - Max: {{ maxEta }})</span><br>
 						<input type="number" :style="etaStyle" name="eta" id="eta" :min="minEta" :max="maxEta" v-model="eta">
-						<p v-if="!checkInput('eta')">Età consentite: {{ minEta }} - {{ maxEta }}</p>
 
 						<p><b>Sesso</b></p>
 						<label for="uomo">Uomo</label>
@@ -353,12 +353,12 @@
 	@media only screen and (min-width: 768px) {
 
 		#loginContent, #registrazioneContent {
-			height: 650px;
+			height: 800px;
 		}
 
 		#loginForm, #registrazioneForm {
 			width: 70%;
-			top: 40%;
+			top: 50%;
 		}
 
 		.col-reg {
@@ -376,7 +376,7 @@
 	}
 
 
-	/* Media query per smartphone*/
+	/* Media query per smartphone */
 	@media only screen and (max-width: 768px) {
 
 		#loginContent {

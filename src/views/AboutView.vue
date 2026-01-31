@@ -8,6 +8,8 @@
 
 		data() {
 			return {
+
+				// Array con le informazioni dei componenti del gruppo
 				gruppoFPW: [
 					{
 						nome: "Alessandro Deidda",
@@ -34,6 +36,8 @@
 		},
 
 		methods: {
+
+			// Metodo per la restituzione del path intero a partire dal nome del file immagine
 			getUrlImage(immagine) {
 				return new URL(`../assets/img/about/${immagine}`, import.meta.url);
 			}
@@ -51,8 +55,3 @@
 	</article>
 
 </template>
-
-
-<style scoped>
-
-</style>

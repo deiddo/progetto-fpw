@@ -84,7 +84,7 @@
 		padding: 2% 5%;
 		border-radius: 15px;
 
-		background-color: var(--rossoScuroTer);
+		background-color: var(--rossoScuro);
 		color: var(--bianco);
 		font-family: sans-serif;
 	}
@@ -95,7 +95,7 @@
 
 	.nome p {
 		font-size: 3.5vh;
-		font-weight: bolder;
+		font-family: 'ChuckNoon';
 	}
 
 
