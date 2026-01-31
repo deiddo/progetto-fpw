@@ -56,17 +56,18 @@
 	<Navbar />
 
 	<aside class="col-3" id="infoSecondarie">
-		<h1>STATISTICHE DEL MUSEO</h1>
+		<p class="titleInfoSec"><b>STATISTICHE DEL MUSEO</b></p>
 		<p>Numero di utenti registrati: {{ numUtenti }}</p>
 		<p>Numero di oggetti in catalogo: {{ numProdotti }}</p>
 		<p>Grado medio di stranezza:</p>
-		<img src="/src/assets/img/star.png" alt="" v-for="value in gradoMedioStranezza">
+		<img src="/src/assets/img/star.png" v-for="value in gradoMedioStranezza">
 	</aside>
 
 	<RouterView />
 
 	<aside class="col-3" id="pubblicita">
-		nigeria
+		<p>PUBBLICITÀ</p>
+		<img src="/src/assets/img/pubb2.jpeg" alt="">
 	</aside>
 
 	<Footer />
@@ -75,18 +76,41 @@
 <style scoped>
 	
 	#infoSecondarie {
+		font-family: 'ChuckNoon';
+
 		background-color: rgba(83, 83, 83, 0.3);
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 		border-bottom-right-radius: 25px;
-		position: sticky;
-		top: 58px;
 	}
+
+	.titleInfoSec {
+		font-size: 2em;
+		
+	}
+
+	#pubblicita p {
+		font-family: sans-serif;
+	}
+
+
+	@media only screen and (min-width: 768px) {
+
+		#pubblicita img {
+			width: 100%;
+			display: block;
+		}
+	}
+
 
 	/*	Media query per smartphone	*/
 	@media only screen and (max-width: 768px) {
 
 		#infoSecondarie {
 			border-bottom-left-radius: 25px;
+		}
+
+		#pubblicita img {
+			width: 100%;
 		}
 
 	}

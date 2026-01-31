@@ -172,6 +172,14 @@
 
 <style scoped>
 
+	h1 {
+		font-family: 'ChuckNoon';
+	}
+
+	p {
+		font-family: sans-serif;
+	}
+
 	#toggle-psw {
 		margin-right: 20px;
 	}

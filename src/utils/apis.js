@@ -12,14 +12,14 @@ const getListaProdotti = async () => {
     return await response.json();
 }
 
-const addProdotto = async (nome, descrizione, ritrovamento, grado_stranezza, immagine, utente) => {
+const addProdotto = async (nome, descrizione, prezzo, ritrovamento, grado_stranezza, immagine, utente) => {
 
     const response = await fetch('api/prodotti/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ nome, descrizione, ritrovamento, grado_stranezza, immagine, utente })
+        body: JSON.stringify({ nome, descrizione, prezzo, ritrovamento, grado_stranezza, immagine, utente })
     });
 
 	return await response.json();

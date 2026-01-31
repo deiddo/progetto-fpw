@@ -7,12 +7,26 @@
 			return {
 				nome: '',							maxCharNome: 64,
 				descrizione: '',					maxCharDesc: 256,
+				prezzo: 1,							minPrezzo: 1,			maxPrezzo: 1000000000,
 				ritrovamento: '',					maxCharRitr: 128,
 				grado_stranezza: 1,					minGradoStran: 1,		maxGradoStran: 5,
 				immagine: '',
 				utente: '',
 
 				sessionStore: useSessionStore(),
+
+				// Stile per l'input del prezzo da modificare in caso di valore non corretto
+				prezzoStyle: {
+					color: 'black'
+				},
+			}
+		},
+
+		watch: {
+			prezzo: {
+				handler() {
+					this.checkInput('prezzo');
+				}
 			}
 		},
 
@@ -51,6 +65,16 @@
 					
 						return true;
 
+					case 'prezzo':
+
+						if(this.prezzo >= this.minPrezzo && this.prezzo <= this.maxPrezzo) {
+							this.prezzoStyle.color = 'black';
+							return true;
+						}
+
+						this.prezzoStyle.color = 'red';
+						return false;
+
 					case 'ritrovamento':
 						if(this.ritrovamento.length == 0)
 							return false;
@@ -67,7 +91,7 @@
 						return true;
 
 					case 'all':
-						return this.checkInput('nome') && this.checkInput('descrizione') && this.checkInput('ritrovamento') && this.checkInput('grado_stranezza');
+						return this.checkInput('nome') && this.checkInput('descrizione') && this.checkInput('prezzo') && this.checkInput('ritrovamento') && this.checkInput('grado_stranezza');
 
 					default:
 						console.log('Errore');
@@ -89,28 +113,42 @@
 
 			<form action="prodotti" method="POST" id="inserimentoForm">
 
-				<b><label for="nome">Nome</label></b><br>
-				<input type="text" name="nome" id="nome" v-model="nome" @input="checkInput('nome')">
-				<p id="caratteri-nome">Caratteri: {{ nome.length }}/{{ maxCharNome }}</p>
-				<br><br>
+				<div class="input-reg">
+					<div class="col-reg">
+						<b><label for="nome">Nome</label></b><br>
+						<input type="text" name="nome" id="nome" v-model="nome" @input="checkInput('nome')">
+						<p id="caratteri-nome">Caratteri: {{ nome.length }}/{{ maxCharNome }}</p>
+						<br>
 
-				<b><label for="descrizione">Descrizione</label></b><br>
-				<textarea name="descrizione" id="descrizione" v-model="descrizione" @input="checkInput('descrizione')"></textarea>
-				<p id="caratteri-descrizione">Caratteri: {{ descrizione.length }}/{{ maxCharDesc }}</p>
-				<br><br>
+						<b><label for="descrizione">Descrizione</label></b><br>
+						<textarea name="descrizione" id="descrizione" v-model="descrizione" @input="checkInput('descrizione')"></textarea>
+						<p id="caratteri-descrizione">Caratteri: {{ descrizione.length }}/{{ maxCharDesc }}</p>
+						<br>
 
-				<b><label for="ritrovamento">Ritrovamento</label></b><br>
-				<input type="text" name="ritrovamento" id="ritrovamento" v-model="ritrovamento" @input="checkInput('ritrovamento')">
-				<p id="caratteri-ritrovamento">Caratteri: {{ ritrovamento.length }}/{{ maxCharRitr }}</p>
-				<br><br>
+						<b><label for="prezzo">Prezzo</label></b><br>
+						<span v-if="!checkInput('prezzo')" class="errInput">(Min: {{ minPrezzo }} - Max: {{ maxPrezzo }})</span><br>
+						<input type="number" :style="prezzoStyle" name="prezzo" id="prezzo" :min="minPrezzo" :max="maxPrezzo" v-model="prezzo">
+						<br>
+					</div>
 
-				<b><label for="grado_stranezza">Grado di stranezza</label></b><br>
-				<select v-model="grado_stranezza">
-					<option v-for="value in maxGradoStran" :key="value">{{ value }}</option>
-				</select>
-				<br><br>
+					<div class="col-reg">
+						<b><label for="ritrovamento">Ritrovamento</label></b><br>
+						<input type="text" name="ritrovamento" id="ritrovamento" v-model="ritrovamento" @input="checkInput('ritrovamento')">
+						<p id="caratteri-ritrovamento">Caratteri: {{ ritrovamento.length }}/{{ maxCharRitr }}</p>
+						<br>
 
-				<input type="submit" value="Conferma" class="button" :disabled="!checkInput('all')" @click.stop.prevent="addProdotto()" />
+						<b><label for="grado_stranezza">Grado di stranezza</label></b><br>
+						<select v-model="grado_stranezza">
+							<option v-for="value in maxGradoStran" :key="value">{{ value }}</option>
+						</select>
+						<br>
+
+						<input type="submit" value="Conferma" class="button" :disabled="!checkInput('all')" @click.stop.prevent="addProdotto()" />
+					</div>
+				</div>
+				
+				<div class="clear" />
+
 			</form>
 		</div>
 		
@@ -121,7 +159,11 @@
 
 <style scoped>
 
-	h1, #inserimentoForm, input[type="text"], textarea {
+	h1 {
+		font-family: 'ChuckNoon';
+	}
+
+	#inserimentoForm, input[type="text"], textarea {
 		font-family: sans-serif;
 	}
 
@@ -143,7 +185,7 @@
 		margin: 0;
 	}
 
-	input[type="text"], textarea, select {
+	input[type="text"], textarea, input[type="number"], select {
 		width: 80%;
 		padding: 5px;
 	}
@@ -157,8 +199,17 @@
 		}
 
 		#inserimentoForm {
-			top: 45%;
-			width: 60%;
+			top: 50%;
+			width: 80%;
+		}
+
+		.col-reg {
+			float: left;
+			width: 50%;
+		}
+
+		.clear {
+			clear: both;
 		}
 
 	}

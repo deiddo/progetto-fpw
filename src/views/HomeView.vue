@@ -6,13 +6,13 @@
 <template>
 
 	<article class="col-6">
-		<h1>Benvenuti nel museo Spoti Pati</h1>
+		<h1>Benvenuti nel museo <span class="nomeSito">Spoti Pati</span></h1>
 		
 		<hr><hr>
 
 		<h2>Che cos'è questo museo?</h2>
 		<p>Una collezione unica di artefatti affascinanti, inspiegabili e unici nel loro genere, ritrovati nei meandri più nascosti della Terra, prelevati da vari
-			periodi temporali, usando una macchina del tempo a forma di cabina telefonica inglese.
+			periodi temporali, e acquistati da noi sul dark web (ma questo non ditelo a nessuno).
 		</p>
 
 		<hr>
@@ -37,6 +37,10 @@
 
 	p, h1, h2 {
 		font-family: sans-serif;
+	}
+
+	.nomeSito {
+		font-family: 'ChuckNoon';
 	}
 
 	h1 {

@@ -20,6 +20,11 @@
 				required: false
 			},
 
+			prezzo: {
+				type: Number,
+				required: false
+			},
+
 			ritrovamento: {
 				type: String,
 				required: false
@@ -56,6 +61,8 @@
 				<p>{{ descrizione }}</p>
 
 				<p v-show="ritrovamento != null"><b>Ritrovamento:</b> {{ ritrovamento }}</p>
+
+				<p v-show="prezzo != null"><b>Prezzo:</b> {{ prezzo }} EUR</p>
 
 				<p v-show="grado_stranezza != null"><b>Grado di stranezza:</b></p>
 				<img src="/src/assets/img/star.png" alt="" v-for="value in grado_stranezza">
